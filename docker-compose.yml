@@ -40,7 +40,10 @@ services:
     volumes:
       - stage_data:/var/lib/mysql
 
+
+
   # START OF SERVICE CONTAINERS
+  
   schedule-service:
     depends_on:
       - mariadb-schedule
@@ -91,7 +94,9 @@ services:
       - MARIADB_DB_PORT: 3309
 
 
+
   # START OF API GATEWAY
+  
   api-gateway:
     depends_on:
       - schedule-service
@@ -108,7 +113,9 @@ services:
       STAGE_SERVICE_BASEURL: stage-service:8084
   
 
+
   # START OF DATA VOLUMES
+
 volumes:
   schedule_data:
   artist_data:
