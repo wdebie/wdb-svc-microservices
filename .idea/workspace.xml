@@ -42,6 +42,13 @@
   }
 }]]></component>
   <component name="RunManager" selected="Spring Boot.ScheduleServiceApplication">
+    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="api-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="fact.it.apigateway.ApiGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ArtistServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="artist-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="fact.it.artistservice.ArtistServiceApplication" />
@@ -87,7 +94,7 @@
       <option name="presentableId" value="Default" />
       <updated>1728998077780</updated>
       <workItem from="1728998078843" duration="1628000" />
-      <workItem from="1729601883544" duration="1306000" />
+      <workItem from="1729601883544" duration="1830000" />
     </task>
     <servers />
   </component>

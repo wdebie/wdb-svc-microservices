@@ -6,3 +6,5 @@ Our Docker Compose architecture will look like this:
 - `artist-service` (MongoDB db for artists, view/register/edit artists)
 - `food-service` (MySQL db, two tables: register/edit foodtrucks, register/edit food prices)
 - `stage-service` (MariaDB db, manage stages: location, max. capacity, technical info)
+
+![Schema](../FristFest.png)

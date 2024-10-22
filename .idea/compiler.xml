@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="artist-service" />
+        <module name="api-gateway" />
         <module name="stage-service" />
         <module name="food-service" />
         <module name="schedule-service" />
@@ -15,6 +16,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
       <module name="artist-service" options="-parameters" />
       <module name="food-service" options="-parameters" />
       <module name="schedule-service" options="-parameters" />
