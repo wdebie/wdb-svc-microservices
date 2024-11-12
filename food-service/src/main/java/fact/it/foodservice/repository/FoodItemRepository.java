@@ -1,4 +1,4 @@
 package fact.it.foodservice.repository;
 
-public interface FoodRepository {
+public interface FoodItemRepository {
 }
