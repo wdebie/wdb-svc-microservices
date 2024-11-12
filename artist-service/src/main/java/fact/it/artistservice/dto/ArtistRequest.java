@@ -1,25 +1,19 @@
-package fact.it.artistservice.model;
+package fact.it.artistservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 
-@Document(value = "artist")
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Data
-public class Artist {
-
-    @Id
-    private String artistId;
-    private String skuCode;
+public class ArtistRequest {
     private String name;
+    private String skuCode;
     private String repEmail;
     private BigDecimal bookingPrice;
     private String repPhone;
