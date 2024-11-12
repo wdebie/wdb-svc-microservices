@@ -44,7 +44,7 @@ services:
   schedule-service:
     depends_on:
       - mariadb-schedule
-    image: wdebie/schedule-service
+    image: willemdebie/schedule-service
     ports:
       - 8081:8081
     environment:
@@ -59,7 +59,7 @@ services:
   artist-service:
     depends_on:
       - mongodb-artist
-    image: wdebie/artist-service
+    image: willemdebie/artist-service
     ports:
       - 8082:8082
     environment:
@@ -69,7 +69,7 @@ services:
   food-service:
     depends_on:
       - mysql-food
-    image: wdebie/food-service
+    image: willemdebie/food-service
     ports:
       - 8083:8083
     environment:
@@ -81,7 +81,7 @@ services:
   stage-service:
     depends_on:
       - mariadb-stage
-    image: wdebie/stage-service
+    image: willemdebie/stage-service
     ports:
       - 8084:8084
     environment:
@@ -92,20 +92,20 @@ services:
 
   # START OF API GATEWAY
 
-  api-gateway:
-    depends_on:
-      - schedule-service
-      - artist-service
-      - food-service
-      - stage-service
-    image: wdebie/api-gateway
-    ports:
-      - 8080:8080
-    environment:
-      SCHEDULE_SERVICE_BASEURL: schedule-service:8081
-      ARTIST_SERVICE_BASEURL: artist-service:8082
-      FOOD_SERVICE_BASEURL: food-service:8083
-      STAGE_SERVICE_BASEURL: stage-service:8084
+  # api-gateway:
+  #   depends_on:
+  #     - schedule-service
+  #     - artist-service
+  #     - food-service
+  #     - stage-service
+  #   image: willemdebie/api-gateway
+  #   ports:
+  #     - 8080:8080
+  #   environment:
+  #     SCHEDULE_SERVICE_BASEURL: schedule-service:8081
+  #     ARTIST_SERVICE_BASEURL: artist-service:8082
+  #     FOOD_SERVICE_BASEURL: food-service:8083
+  #     STAGE_SERVICE_BASEURL: stage-service:8084
 
   # START OF DATA VOLUMES
 
