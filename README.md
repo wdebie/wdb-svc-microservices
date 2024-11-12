@@ -2,6 +2,7 @@ In this project, we create a Java system with microservices to run our applicati
 
 Our Docker Compose architecture will look like this:
 
+- `api-gateway`
 - `schedule-service` (MariaDB db, main page/service, landing page)
 - `artist-service` (MongoDB db for artists, view/register/edit artists)
 - `food-service` (MySQL db, two tables: register/edit foodtrucks, register/edit food prices)
