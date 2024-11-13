@@ -20,5 +20,6 @@ public class FoodItem {
     private BigDecimal price;
 
     @ManyToOne
+    @JoinColumn(name = "foodTruckId")
     private FoodTruck foodTruck;
 }
