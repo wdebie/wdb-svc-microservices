@@ -70,6 +70,7 @@ public class FoodItemService {
                 .foodItemId(foodItem.getFoodItemId())
                 .name(foodItem.getName())
                 .price(foodItem.getPrice())
+                .skuCode(foodItem.getSkuCode())
                 .build();
     }
 }
