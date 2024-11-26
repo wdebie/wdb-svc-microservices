@@ -69,6 +69,7 @@ public class FoodTruckService {
                 .name(foodTruck.getName())
                 .repName(foodTruck.getRepName())
                 .repPhone(foodTruck.getRepPhone())
+                .skuCode(foodTruck.getSkuCode())
                 .build();
     }
 
