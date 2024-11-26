@@ -54,12 +54,11 @@ class FoodServiceApplicationTests {
 
     @Test
     void testGetAllFoodItems() {
-        FoodItem foodItem = FoodItem.builder()
-                .foodItemId(1L)
-                .name("Test Food Item")
-                .skuCode("test123")
-                .price(BigDecimal.valueOf(9.99))
-                .build();
+        FoodItem foodItem = new FoodItem();
+        foodItem.setFoodItemId(1L);
+        foodItem.setName("Test Food Item");
+        foodItem.setSkuCode("test123");
+        foodItem.setPrice(BigDecimal.valueOf(9.99));
 
         when(foodItemRepository.findAll()).thenReturn(List.of(foodItem));
 
@@ -74,12 +73,11 @@ class FoodServiceApplicationTests {
 
     @Test
     void testGetAllFoodItemsBySkuCode() {
-        FoodItem foodItem = FoodItem.builder()
-                .foodItemId(1L)
-                .name("Test Food Item")
-                .skuCode("test123")
-                .price(BigDecimal.valueOf(9.99))
-                .build();
+        FoodItem foodItem = new FoodItem();
+        foodItem.setFoodItemId(1L);
+        foodItem.setName("Test Food Item");
+        foodItem.setSkuCode("test123");
+        foodItem.setPrice(BigDecimal.valueOf(9.99));
 
         when(foodItemRepository.findBySkuCodeIn(Arrays.asList("test123"))).thenReturn(List.of(foodItem));
 
@@ -108,13 +106,12 @@ class FoodServiceApplicationTests {
 
     @Test
     void testGetAllFoodTrucks() {
-        FoodTruck foodTruck = FoodTruck.builder()
-                .foodTruckId(1L)
-                .name("Test Food Truck")
-                .skuCode("test123")
-                .repName("John Doe")
-                .repPhone("1234567890")
-                .build();
+        FoodTruck foodTruck = new FoodTruck();
+        foodTruck.setFoodTruckId(1L);
+        foodTruck.setName("Test Food Truck");
+        foodTruck.setSkuCode("test123");
+        foodTruck.setRepName("John Doe");
+        foodTruck.setRepPhone("1234567890");
 
         when(foodTruckRepository.findAll()).thenReturn(List.of(foodTruck));
 
@@ -129,13 +126,12 @@ class FoodServiceApplicationTests {
 
     @Test
     void testGetAllFoodTrucksBySkuCode() {
-        FoodTruck foodTruck = FoodTruck.builder()
-                .foodTruckId(1L)
-                .name("Test Food Truck")
-                .skuCode("test123")
-                .repName("John Doe")
-                .repPhone("1234567890")
-                .build();
+        FoodTruck foodTruck = new FoodTruck();
+        foodTruck.setFoodTruckId(1L);
+        foodTruck.setName("Test Food Truck");
+        foodTruck.setSkuCode("test123");
+        foodTruck.setRepName("John Doe");
+        foodTruck.setRepPhone("1234567890");
 
         when(foodTruckRepository.findBySkuCodeIn(Arrays.asList("test123"))).thenReturn(List.of(foodTruck));
 
