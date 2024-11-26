@@ -53,10 +53,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
             <exclusions>
-                <exclude>
+                <exclusion>
                     <groupId>org.mockito</groupId>
                     <artifactId>mockito-core</artifactId>
-                </exclude>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
