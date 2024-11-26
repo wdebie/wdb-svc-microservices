@@ -1,43 +1,150 @@
 package fact.it.foodservice;
 
+import fact.it.foodservice.dto.FoodItemRequest;
+import fact.it.foodservice.dto.FoodItemResponse;
+import fact.it.foodservice.dto.FoodTruckRequest;
+import fact.it.foodservice.dto.FoodTruckResponse;
 import fact.it.foodservice.model.FoodItem;
 import fact.it.foodservice.model.FoodTruck;
+import fact.it.foodservice.repository.FoodItemRepository;
+import fact.it.foodservice.repository.FoodTruckRepository;
+import fact.it.foodservice.service.FoodItemService;
+import fact.it.foodservice.service.FoodTruckService;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class FoodServiceApplicationTests {
 
-    @Test
-    void testFoodTruckCreation() {
-        FoodTruck foodTruck = new FoodTruck();
-        foodTruck.setName("Test Food Truck");
-        foodTruck.setSkuCode("TFT001");
-        foodTruck.setRepName("John Doe");
-        foodTruck.setRepPhone("1234567890");
+    @Mock
+    private FoodItemRepository foodItemRepository;
 
-        assertNotNull(foodTruck);
-        assertEquals("Test Food Truck", foodTruck.getName());
-        assertEquals("TFT001", foodTruck.getSkuCode());
-        assertEquals("John Doe", foodTruck.getRepName());
-        assertEquals("1234567890", foodTruck.getRepPhone());
+    @Mock
+    private FoodTruckRepository foodTruckRepository;
+
+    @InjectMocks
+    private FoodItemService foodItemService;
+
+    @InjectMocks
+    private FoodTruckService foodTruckService;
+
+    @Test
+    void testCreateFoodItem() {
+        FoodItemRequest foodItemRequest = FoodItemRequest.builder()
+                .name("Test Food Item")
+                .skuCode("test123")
+                .price(BigDecimal.valueOf(9.99))
+                .build();
+
+        foodItemService.createFoodItem(foodItemRequest, null);
+
+        verify(foodItemRepository, times(1)).save(any(FoodItem.class));
     }
 
     @Test
-    void testFoodItemCreation() {
-        FoodItem foodItem = new FoodItem();
-        foodItem.setName("Test Food Item");
-        foodItem.setSkuCode("TFI001");
-        foodItem.setPrice(BigDecimal.valueOf(9.99));
+    void testGetAllFoodItems() {
+        FoodItem foodItem = FoodItem.builder()
+                .foodItemId(1L)
+                .name("Test Food Item")
+                .skuCode("test123")
+                .price(BigDecimal.valueOf(9.99))
+                .build();
 
-        assertNotNull(foodItem);
-        assertEquals("Test Food Item", foodItem.getName());
-        assertEquals("TFI001", foodItem.getSkuCode());
-        assertEquals(BigDecimal.valueOf(9.99), foodItem.getPrice());
+        when(foodItemRepository.findAll()).thenReturn(List.of(foodItem));
+
+        List<FoodItemResponse> foodItems = foodItemService.getAllFoodItems();
+
+        assertEquals(1, foodItems.size());
+        assertEquals("Test Food Item", foodItems.get(0).getName());
+        assertEquals("test123", foodItems.get(0).getSkuCode());
+
+        verify(foodItemRepository, times(1)).findAll();
+    }
+
+    @Test
+    void testGetAllFoodItemsBySkuCode() {
+        FoodItem foodItem = FoodItem.builder()
+                .foodItemId(1L)
+                .name("Test Food Item")
+                .skuCode("test123")
+                .price(BigDecimal.valueOf(9.99))
+                .build();
+
+        when(foodItemRepository.findBySkuCodeIn(Arrays.asList("test123"))).thenReturn(List.of(foodItem));
+
+        List<FoodItemResponse> foodItems = foodItemService.getAllFoodItemsBySkuCode(Arrays.asList("test123"));
+
+        assertEquals(1, foodItems.size());
+        assertEquals("Test Food Item", foodItems.get(0).getName());
+        assertEquals("test123", foodItems.get(0).getSkuCode());
+
+        verify(foodItemRepository, times(1)).findBySkuCodeIn(Arrays.asList("test123"));
+    }
+
+    @Test
+    void testCreateFoodTruck() {
+        FoodTruckRequest foodTruckRequest = FoodTruckRequest.builder()
+                .name("Test Food Truck")
+                .skuCode("test123")
+                .repName("John Doe")
+                .repPhone("1234567890")
+                .build();
+
+        foodTruckService.createFoodTruck(foodTruckRequest);
+
+        verify(foodTruckRepository, times(1)).save(any(FoodTruck.class));
+    }
+
+    @Test
+    void testGetAllFoodTrucks() {
+        FoodTruck foodTruck = FoodTruck.builder()
+                .foodTruckId(1L)
+                .name("Test Food Truck")
+                .skuCode("test123")
+                .repName("John Doe")
+                .repPhone("1234567890")
+                .build();
+
+        when(foodTruckRepository.findAll()).thenReturn(List.of(foodTruck));
+
+        List<FoodTruckResponse> foodTrucks = foodTruckService.getAllFoodTrucks();
+
+        assertEquals(1, foodTrucks.size());
+        assertEquals("Test Food Truck", foodTrucks.get(0).getName());
+        assertEquals("test123", foodTrucks.get(0).getSkuCode());
+
+        verify(foodTruckRepository, times(1)).findAll();
+    }
+
+    @Test
+    void testGetAllFoodTrucksBySkuCode() {
+        FoodTruck foodTruck = FoodTruck.builder()
+                .foodTruckId(1L)
+                .name("Test Food Truck")
+                .skuCode("test123")
+                .repName("John Doe")
+                .repPhone("1234567890")
+                .build();
+
+        when(foodTruckRepository.findBySkuCodeIn(Arrays.asList("test123"))).thenReturn(List.of(foodTruck));
+
+        List<FoodTruckResponse> foodTrucks = foodTruckService.getAllFoodTrucksBySkuCode(Arrays.asList("test123"));
+
+        assertEquals(1, foodTrucks.size());
+        assertEquals("Test Food Truck", foodTrucks.get(0).getName());
+        assertEquals("test123", foodTrucks.get(0).getSkuCode());
+
+        verify(foodTruckRepository, times(1)).findBySkuCodeIn(Arrays.asList("test123"));
     }
 }
