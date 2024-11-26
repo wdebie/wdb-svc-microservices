@@ -6,8 +6,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import fact.it.stageservice.repository.StageRepository;
+import fact.it.stageservice.service.StageService;
+import fact.it.stageservice.dto.StageRequest;
+import fact.it.stageservice.dto.StageResponse;
+import fact.it.stageservice.model.Stage;
+
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 class StageServiceApplicationTests {
