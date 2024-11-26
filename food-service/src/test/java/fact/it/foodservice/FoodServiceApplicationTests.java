@@ -67,6 +67,7 @@ class FoodServiceApplicationTests {
         assertEquals(1, foodItems.size());
         assertEquals("Test Food Item", foodItems.get(0).getName());
         assertEquals("test123", foodItems.get(0).getSkuCode());
+        assertEquals(BigDecimal.valueOf(9.99), foodItems.get(0).getPrice());
 
         verify(foodItemRepository, times(1)).findAll();
     }
@@ -86,6 +87,7 @@ class FoodServiceApplicationTests {
         assertEquals(1, foodItems.size());
         assertEquals("Test Food Item", foodItems.get(0).getName());
         assertEquals("test123", foodItems.get(0).getSkuCode());
+        assertEquals(BigDecimal.valueOf(9.99), foodItems.get(0).getPrice());
 
         verify(foodItemRepository, times(1)).findBySkuCodeIn(Arrays.asList("test123"));
     }
@@ -120,6 +122,8 @@ class FoodServiceApplicationTests {
         assertEquals(1, foodTrucks.size());
         assertEquals("Test Food Truck", foodTrucks.get(0).getName());
         assertEquals("test123", foodTrucks.get(0).getSkuCode());
+        assertEquals("John Doe", foodTrucks.get(0).getRepName());
+        assertEquals("1234567890", foodTrucks.get(0).getRepPhone());
 
         verify(foodTruckRepository, times(1)).findAll();
     }
@@ -140,6 +144,8 @@ class FoodServiceApplicationTests {
         assertEquals(1, foodTrucks.size());
         assertEquals("Test Food Truck", foodTrucks.get(0).getName());
         assertEquals("test123", foodTrucks.get(0).getSkuCode());
+        assertEquals("John Doe", foodTrucks.get(0).getRepName());
+        assertEquals("1234567890", foodTrucks.get(0).getRepPhone());
 
         verify(foodTruckRepository, times(1)).findBySkuCodeIn(Arrays.asList("test123"));
     }
