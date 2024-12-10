@@ -4,6 +4,7 @@ import fact.it.stageservice.dto.StageRequest;
 import fact.it.stageservice.dto.StageResponse;
 import fact.it.stageservice.model.Stage;
 import fact.it.stageservice.repository.StageRepository;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.List;
 public class StageService {
     private final StageRepository stageRepository;
 
+    @PostConstruct
     public void loadData(){
         if (stageRepository.count()<=0){
             Stage stage = new Stage();
