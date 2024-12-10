@@ -3,6 +3,7 @@ package fact.it.foodservice.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,6 @@ public class FoodTruck {
     private String repName;
     private String repPhone;
 
-    @OneToMany(mappedBy = "foodTruck")
-    private List<FoodItem> foodItems;
+//    @OneToMany(mappedBy = "foodTruck")
+//    private List<FoodItem> foodItems = new ArrayList<>();
 }

@@ -24,11 +24,11 @@ public class FoodTruckController {
         foodTruckService.createFoodTruck(foodTruckRequest);
     }
 
-    @PostMapping("/{foodTruckId}/fooditem")
-    @ResponseStatus(HttpStatus.OK)
-    public void addFoodItemsToFoodTruck(@PathVariable Long foodTruckId, @RequestBody FoodItemRequest foodItemRequest){
-        foodTruckService.addFoodItemToFoodTruck(foodTruckId,foodItemRequest);
-    }
+//    @PostMapping("/{foodTruckId}/fooditem")
+//    @ResponseStatus(HttpStatus.OK)
+//    public void addFoodItemsToFoodTruck(@PathVariable Long foodTruckId, @RequestBody FoodItemRequest foodItemRequest){
+//        foodTruckService.addFoodItemToFoodTruck(foodTruckId,foodItemRequest);
+//    }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -40,10 +40,10 @@ public class FoodTruckController {
     @ResponseStatus(HttpStatus.OK)
     public List<FoodTruckResponse> getAllFoodTrucks(){return foodTruckService.getAllFoodTrucks();}
 
-    @GetMapping("/{foodTruckId}/fooditem")
-    @ResponseStatus(HttpStatus.OK)
-    public List<FoodItemResponse> getFoodItemsByFoodTruck(@PathVariable Long foodTruckId){
-        return foodTruckService.getFoodItemsByFoodTruck(foodTruckId);
-    }
+//    @GetMapping("/{foodTruckId}/fooditem")
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<FoodItemResponse> getFoodItemsByFoodTruck(@PathVariable Long foodTruckId){
+//        return foodTruckService.getFoodItemsByFoodTruck(foodTruckId);
+//    }
 
 }

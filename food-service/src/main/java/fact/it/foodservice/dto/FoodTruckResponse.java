@@ -20,6 +20,6 @@ public class FoodTruckResponse {
     private String repName;
     private String repPhone;
 
-    @OneToMany(mappedBy = "foodTruck")
-    private List<FoodItem> foodItems;
+//    @OneToMany(mappedBy = "foodTruck")
+//    private List<FoodItem> foodItems;
 }

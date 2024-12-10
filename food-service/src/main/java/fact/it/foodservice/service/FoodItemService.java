@@ -22,15 +22,32 @@ public class FoodItemService {
     @PostConstruct
     public void loadData(){
         if(foodItemRepository.count() <= 0){
+            FoodTruck foodTruck = new FoodTruck();
+            foodTruck.setSkuCode("ft122");
+            foodTruck.setName("Spaghetti Parade");
+            foodTruck.setRepName("Mister Spaghetti");
+            foodTruck.setRepPhone("+32 59 79 02 86");
+
+            FoodTruck foodTruck1 = new FoodTruck();
+            foodTruck1.setSkuCode("parking12");
+            foodTruck1.setName("De Parking Paellas");
+            foodTruck1.setRepName("Mark Spanje");
+            foodTruck1.setRepPhone("112");
+
+            foodTruckRepository.save(foodTruck);
+            foodTruckRepository.save(foodTruck1);
             FoodItem foodItem = new FoodItem();
             foodItem.setSkuCode("spag1");
             foodItem.setName("Spaghetti");
             foodItem.setPrice(BigDecimal.valueOf(2.20));
+            foodItem.setFoodTruck(foodTruck);
+
 
             FoodItem foodItem1  = new FoodItem();
             foodItem1.setSkuCode("es");
             foodItem1.setName("Paella");
             foodItem1.setPrice(BigDecimal.valueOf(2.50));
+            foodItem1.setFoodTruck(foodTruck1);
 
             foodItemRepository.save(foodItem);
             foodItemRepository.save(foodItem1);
@@ -43,12 +60,12 @@ public class FoodItemService {
         foodItem.setPrice(foodItemRequest.getPrice());
         foodItem.setName(foodItemRequest.getName());
 
-        if(foodTruckId != null){
-            FoodTruck foodTruck = foodTruckRepository.findById(foodTruckId)
-                    .orElseThrow(()-> new IllegalArgumentException("FoodTruck not found"));
-            foodItem.setFoodTruck(foodTruck);
-            foodTruck.getFoodItems().add(foodItem);
-        }
+//        if(foodTruckId != null){
+//            FoodTruck foodTruck = foodTruckRepository.findById(foodTruckId)
+//                    .orElseThrow(()-> new IllegalArgumentException("FoodTruck not found"));
+//            foodItem.setFoodTruck(foodTruck);
+//            foodTruck.getFoodItems().add(foodItem);
+//        }
 
         foodItemRepository.save(foodItem);
     }
@@ -71,6 +88,7 @@ public class FoodItemService {
                 .name(foodItem.getName())
                 .price(foodItem.getPrice())
                 .skuCode(foodItem.getSkuCode())
+                .foodTruck(foodItem.getFoodTruck())
                 .build();
     }
 }
