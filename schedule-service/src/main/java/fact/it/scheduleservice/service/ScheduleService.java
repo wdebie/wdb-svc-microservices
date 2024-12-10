@@ -17,9 +17,9 @@ public class ScheduleService {
     public void createSchedule(ScheduleRequest scheduleRequest){
         Schedule schedule = Schedule.builder()
                 .skuCode(scheduleRequest.getSkuCode())
-//                .ArtistId(scheduleRequest.getArtistId())
-//                .FoodTruckId(scheduleRequest.getFoodTruckId())
-//                .StageId(scheduleRequest.getStageId())
+                .ArtistId(scheduleRequest.getArtistId())
+                .FoodTruckId(scheduleRequest.getFoodTruckId())
+                .StageId(scheduleRequest.getStageId())
                 .endTime(scheduleRequest.getEndTime())
                 .startTime(scheduleRequest.getStartTime())
                 .build();
