@@ -1,6 +1,6 @@
 package fact.it.scheduleservice.model;
 
-import fact.it.artistservice.model.Artist;
+
 import jakarta.persistence.*;
 import lombok.*;
 
