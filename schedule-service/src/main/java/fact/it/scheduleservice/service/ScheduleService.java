@@ -68,9 +68,9 @@ public class ScheduleService {
     private ScheduleResponse mapToScheduleResponse(Schedule schedule){
         return ScheduleResponse.builder()
                 .scheduleId(schedule.getScheduleId())
-//                .FoodTruckId(schedule.getFoodTruckId())
-//                .StageId(schedule.getStageId())
-//                .ArtistId(schedule.getArtistId())
+                .FoodTruckId(schedule.getFoodTruckId())
+                .StageId(schedule.getStageId())
+                .ArtistId(schedule.getArtistId())
                 .startTime(schedule.getStartTime())
                 .endTime(schedule.getEndTime())
                 .skuCode(schedule.getSkuCode())
