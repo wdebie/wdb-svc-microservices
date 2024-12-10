@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
+
 @Data
 @Table(name = "schedule")
 @Entity
@@ -22,8 +22,8 @@ public class Schedule {
     private String skuCode;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private String ArtistId;
-    private Long StageId;
-    private Long FoodTruckId;
+//    private String ArtistId;
+//    private Long StageId;
+//    private Long FoodTruckId;
 
 }
