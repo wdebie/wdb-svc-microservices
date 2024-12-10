@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/foodtrucks")
+@RequestMapping("api/foodtruck")
 @RequiredArgsConstructor
 public class FoodTruckController {
     private final FoodTruckService foodTruckService;
@@ -24,7 +24,7 @@ public class FoodTruckController {
         foodTruckService.createFoodTruck(foodTruckRequest);
     }
 
-    @PostMapping("/{foodTruckId}/fooditems")
+    @PostMapping("/{foodTruckId}/fooditem")
     @ResponseStatus(HttpStatus.OK)
     public void addFoodItemsToFoodTruck(@PathVariable Long foodTruckId, @RequestBody FoodItemRequest foodItemRequest){
         foodTruckService.addFoodItemToFoodTruck(foodTruckId,foodItemRequest);
@@ -40,7 +40,7 @@ public class FoodTruckController {
     @ResponseStatus(HttpStatus.OK)
     public List<FoodTruckResponse> getAllFoodTrucks(){return foodTruckService.getAllFoodTrucks();}
 
-    @GetMapping("/{foodTruckId}/fooditems")
+    @GetMapping("/{foodTruckId}/fooditem")
     @ResponseStatus(HttpStatus.OK)
     public List<FoodItemResponse> getFoodItemsByFoodTruck(@PathVariable Long foodTruckId){
         return foodTruckService.getFoodItemsByFoodTruck(foodTruckId);
