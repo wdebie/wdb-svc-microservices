@@ -1,0 +1,53 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: INFO
+    reactor.netty: INFO
+    org.springframework.security: TRACE
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 661879216618-0gl8krhgkntc04h7m8qfvnp3k16datne.apps.googleusercontent.com
+            client-secret: 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
+            scope: openid,profile,email
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
+          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+  cloud:
+    gateway:
+      routes:
+        - id: schedule-service
+          uri: http://${SCHEDULE_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/schedules
+            - Method=POST
+          filters:
+            - SetPath=/api/schedule
+        - id: artist-service
+          uri: http://${ARTIST_SERVICE_BASEURL:localhost:8082}
+          predicates:
+            - Path=/artists
+            - Method=GET
+          filters:
+            - SetPath=/api/artist
+        - id: food-service
+          uri: http://${FOOD_SERVICE_BASEURL:localhost:8083}
+          predicates:
+            - Path=/foods
+          filters:
+            - SetPath=/api/food
+        - id: stage-service
+          uri: http://${STAGE_SERVICE_BASEURL:localhost:8084}
+          predicates:
+            - Path=/stages
+          filters:
+            - SetPath=/api/stage
