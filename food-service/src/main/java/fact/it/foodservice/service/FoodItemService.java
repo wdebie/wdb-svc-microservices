@@ -28,9 +28,9 @@ public class FoodItemService {
             foodItem.setPrice(BigDecimal.valueOf(2.20));
 
             FoodItem foodItem1  = new FoodItem();
-            foodItem.setSkuCode("es");
-            foodItem.setName("Paella");
-            foodItem.setPrice(BigDecimal.valueOf(2.50));
+            foodItem1.setSkuCode("es");
+            foodItem1.setName("Paella");
+            foodItem1.setPrice(BigDecimal.valueOf(2.50));
 
             foodItemRepository.save(foodItem);
             foodItemRepository.save(foodItem1);
