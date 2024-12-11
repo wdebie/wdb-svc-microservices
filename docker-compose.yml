@@ -5,9 +5,10 @@ services:
     image: mariadb
     restart: always
     ports:
-      - 3310:3306
+      - 3306:3306
     environment:
-      MARIADB_ROOT_PASSWORD: abc123
+      MARIADB_DB_USERNAME: root
+      MARIADB_DB_PASSWORD: abc123
     volumes:
       - schedule_data:/var/lib/mysql/
 
