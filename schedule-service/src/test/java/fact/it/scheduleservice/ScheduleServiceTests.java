@@ -1,26 +1,26 @@
 package fact.it.scheduleservice;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import fact.it.scheduleservice.dto.ScheduleRequest;
 import fact.it.scheduleservice.dto.ScheduleResponse;
 import fact.it.scheduleservice.model.Schedule;
 import fact.it.scheduleservice.repository.ScheduleRepository;
 import fact.it.scheduleservice.service.ScheduleService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-
-@RunWith(MockitoJUnitRunner.class)
-public class ScheduleServiceTests {
+@ExtendWith(MockitoExtension.class)
+class ScheduleServiceTests {
 
     @Mock
     private ScheduleRepository scheduleRepository;
