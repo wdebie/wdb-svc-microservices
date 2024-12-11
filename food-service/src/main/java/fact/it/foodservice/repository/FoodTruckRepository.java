@@ -11,4 +11,5 @@ import java.util.List;
 @Transactional
 public interface FoodTruckRepository extends JpaRepository<FoodTruck, Long> {
     List<FoodTruck> findBySkuCodeIn(List<String> skuCode);
+    FoodTruck findFoodTruckByFoodTruckId(Long id);
 }

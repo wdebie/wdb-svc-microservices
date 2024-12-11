@@ -12,5 +12,5 @@ import java.util.List;
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     List<Schedule> findScheduleBySkuCodeIn(List<String> skuCode);
 
-
+    Schedule findScheduleByScheduleId(Long id);
 }

@@ -40,10 +40,16 @@ public class FoodTruckController {
     @ResponseStatus(HttpStatus.OK)
     public List<FoodTruckResponse> getAllFoodTrucks(){return foodTruckService.getAllFoodTrucks();}
 
-//    @GetMapping("/{foodTruckId}/fooditem")
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<FoodItemResponse> getFoodItemsByFoodTruck(@PathVariable Long foodTruckId){
-//        return foodTruckService.getFoodItemsByFoodTruck(foodTruckId);
-//    }
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public FoodTruckResponse update(@RequestBody FoodTruckRequest foodTruckRequest){
+        return foodTruckService.update(foodTruckRequest);
+    }
+
+    @DeleteMapping({"/{id}"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id){
+        foodTruckService.delete(id);
+    }
 
 }

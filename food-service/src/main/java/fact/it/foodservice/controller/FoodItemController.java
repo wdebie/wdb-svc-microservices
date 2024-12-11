@@ -27,7 +27,25 @@ public class FoodItemController {
         return foodItemService.getAllFoodItemsBySkuCode(skuCode);
     }
 
+    @GetMapping("/by-food-truck/{foodTruckId}")
+    public List<FoodItemResponse> getFoodItemsByFoodTruckId(@PathVariable Long foodTruckId) {
+        return foodItemService.getFoodItemsByFoodTruckId(foodTruckId);
+
+    }
+
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<FoodItemResponse> getAllFoodItems(){return foodItemService.getAllFoodItems();}
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public FoodItemResponse update(@RequestBody FoodItemRequest foodItemRequest){
+       return foodItemService.update(foodItemRequest);
+    }
+
+    @DeleteMapping({"/{id}"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteFoodItem(@PathVariable Long id){
+        foodItemService.delete(id);
+    }
 }

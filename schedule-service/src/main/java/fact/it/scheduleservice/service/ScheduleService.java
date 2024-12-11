@@ -65,6 +65,32 @@ public class ScheduleService {
         return schedules.stream().map(this::mapToScheduleResponse).toList();
     }
 
+    public ScheduleResponse update(ScheduleRequest scheduleRequest){
+        Schedule schedule = scheduleRepository.findScheduleByScheduleId(scheduleRequest.getScheduleId());
+        schedule.setSkuCode(scheduleRequest.getSkuCode());
+        schedule.setStartTime(scheduleRequest.getStartTime());
+        schedule.setEndTime(scheduleRequest.getEndTime());
+        schedule.setStageId(scheduleRequest.getStageId());
+        schedule.setArtistId(scheduleRequest.getArtistId());
+        schedule.setFoodTruckId(scheduleRequest.getFoodTruckId());
+
+        scheduleRepository.save(schedule);
+        return ScheduleResponse.builder()
+                .scheduleId(schedule.getScheduleId())
+                .skuCode(schedule.getSkuCode())
+                .endTime(schedule.getEndTime())
+                .startTime(schedule.getStartTime())
+                .ArtistId(schedule.getArtistId())
+                .StageId(schedule.getStageId())
+                .FoodTruckId(schedule.getFoodTruckId())
+                .build();
+    }
+
+    public void delete(Long id){
+        Long scheduleCode = scheduleRepository.findScheduleByScheduleId(id).getScheduleId();
+        scheduleRepository.deleteById(scheduleCode);
+    }
+
     private ScheduleResponse mapToScheduleResponse(Schedule schedule){
         return ScheduleResponse.builder()
                 .scheduleId(schedule.getScheduleId())

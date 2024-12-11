@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ArtistRequest {
+    private String artistId;
     private String name;
     private String skuCode;
     private String repEmail;

@@ -30,4 +30,16 @@ public class StageController {
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<StageResponse> getAllStages(){return stageService.getAllStages();}
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public StageResponse update(@RequestBody StageRequest stageRequest){
+        return stageService.update(stageRequest);
+    }
+
+    @DeleteMapping({"/{id}"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id){
+        stageService.delete(id);
+    }
 }

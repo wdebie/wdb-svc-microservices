@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 @Transactional
 public interface ArtistRepository extends MongoRepository<Artist, String> {
-    List<Artist> findBySkuCodeIn(List<String> skuCode);
+    List<Artist> findByArtistIdIn(List<String> artistId);
+
+    Artist findArtistByArtistId(String id);
 }
