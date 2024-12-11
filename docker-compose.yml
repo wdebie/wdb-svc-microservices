@@ -4,17 +4,23 @@ services:
   mariadb-schedule:
     image: mariadb
     restart: always
+    container_name: mariadb-schedule
     ports:
       - 3306:3306
     environment:
       MARIADB_DB_USERNAME: root
-      MARIADB_DB_PASSWORD: abc123
+      MARIADB_DB_PASSWORD: ${SCHEDULE_DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${SCHEDULE_DB_PASSWORD}
     volumes:
       - schedule_data:/var/lib/mysql/
 
   mongodb-artist:
     image: mongo
+    container_name: mongodb-artist
     restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: ${ARTIST_DB_PASSWORD}
     ports:
       - 3307:27017
     volumes:
@@ -23,20 +29,26 @@ services:
   mysql-food:
     image: mysql
     restart: always
+    container_name: mysql-food
     ports:
       - 3308:3306
     environment:
-      MYSQL_ROOT_PASSWORD: abc123
+      MYSQL_DB_USERNAME: root
+      MYSQL_DB_PASSWORD: ${FOOD_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${FOOD_DB_PASSWORD}
     volumes:
       - food_data:/var/lib/mysql
 
   mariadb-stage:
     image: mariadb
     restart: always
+    container_name: mariadb-stage
     ports:
       - 3309:3306
     environment:
-      MARIADB_ROOT_PASSWORD: abc123
+      MARIADB_DB_USERNAME: root
+      MARIADB_DB_PASSWORD: ${STAGE_DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${STAGE_DB_PASSWORD}
     volumes:
       - stage_data:/var/lib/mysql
 
@@ -46,6 +58,7 @@ services:
     depends_on:
       - mariadb-schedule
     image: willemdebie/schedule-service
+    container_name: schedule-service
     ports:
       - 8081:8081
     links:
@@ -57,7 +70,7 @@ services:
       FOOD_SERVICE_BASEURL: food-service:8083
       STAGE_SERVICE_BASEURL: stage-service:8084
       MARIADB_DB_USERNAME: root
-      MARIADB_DB_PASSWORD: abc123
+      MARIADB_DB_PASSWORD: ${SCHEDULE_DB_PASSWORD}
       MARIADB_DB_HOST: mariadb-schedule
       MARIADB_DB_PORT: 3306
 
@@ -65,21 +78,25 @@ services:
     depends_on:
       - mongodb-artist
     image: willemdebie/artist-service
+    container_name: artist-service
     ports:
       - 8082:8082
     environment:
       MONGODB_HOST: mongodb-artist
       MONGODB_PORT: 3307
+      MONGODB_USERNAME: root
+      MONGODB_PASSWORD: ${ARTIST_DB_PASSWORD}
 
   food-service:
     depends_on:
       - mysql-food
     image: willemdebie/food-service
+    container_name: food-service
     ports:
       - 8083:8083
     environment:
       MYSQL_DB_USERNAME: root
-      MYSQL_DB_PASSWORD: abc123
+      MYSQL_DB_PASSWORD: ${FOOD_DB_PASSWORD}
       MYSQL_DB_HOST: mysql-food
       MYSQL_DB_PORT: 3308
 
@@ -87,11 +104,12 @@ services:
     depends_on:
       - mariadb-stage
     image: willemdebie/stage-service
+    container_name: stage-service
     ports:
       - 8084:8084
     environment:
       MARIADB_DB_USERNAME: root
-      MARIADB_DB_PASSWORD: abc123
+      MARIADB_DB_PASSWORD: ${STAGE_DB_PASSWORD}
       MARIADB_DB_HOST: mariadb-stage
       MARIADB_DB_PORT: 3309
 
@@ -104,6 +122,7 @@ services:
   #     - food-service
   #     - stage-service
   #   image: willemdebie/api-gateway
+  #   container_name: api-gateway
   #   ports:
   #     - 8080:8080
   #   environment:
