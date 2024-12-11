@@ -26,6 +26,11 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${ARTIST_DB_PASSWORD}
     volumes:
       - artist_data:/data/db
+    healthcheck:
+      test: ["CMD","mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
 
   mysql-food:
     image: mysql
@@ -83,7 +88,8 @@ services:
 
   artist-service:
     depends_on:
-      - mongodb-artist
+      mongodb-artist:
+        condition: service_healthy
     image: willemdebie/artist-service
     container_name: artist-service
     ports:
