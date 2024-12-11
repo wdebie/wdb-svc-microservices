@@ -5,21 +5,22 @@ import fact.it.scheduleservice.dto.ScheduleResponse;
 import fact.it.scheduleservice.model.Schedule;
 import fact.it.scheduleservice.repository.ScheduleRepository;
 import fact.it.scheduleservice.service.ScheduleService;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
-class ScheduleServiceTests {
+@RunWith(MockitoJUnitRunner.class)
+public class ScheduleServiceTests {
 
     @Mock
     private ScheduleRepository scheduleRepository;
@@ -28,7 +29,7 @@ class ScheduleServiceTests {
     private ScheduleService scheduleService;
 
     @Test
-    void testCreateSchedule() {
+    public void testCreateSchedule() {
         ScheduleRequest scheduleRequest = ScheduleRequest.builder()
                 .skuCode("event123")
                 .startTime(LocalDateTime.of(2023, 10, 1, 10, 0))
@@ -44,7 +45,7 @@ class ScheduleServiceTests {
     }
 
     @Test
-    void testGetAllSchedules() {
+    public void testGetAllSchedules() {
         Schedule schedule = new Schedule();
         schedule.setScheduleId(1L);
         schedule.setSkuCode("event123");
@@ -65,7 +66,7 @@ class ScheduleServiceTests {
     }
 
     @Test
-    void testGetAllSchedulesBySkuCode() {
+    public void testGetAllSchedulesBySkuCode() {
         Schedule schedule = new Schedule();
         schedule.setScheduleId(1L);
         schedule.setSkuCode("event123");
@@ -75,15 +76,15 @@ class ScheduleServiceTests {
         schedule.setStageId(2L);
         schedule.setFoodTruckId(1L);
 
-        when(scheduleRepository.findScheduleBySkuCodeIn(List.of("event123"))).thenReturn(List.of(schedule));
+        when(scheduleRepository.findScheduleBySkuCodeIn(Arrays.asList("event123"))).thenReturn(List.of(schedule));
 
-        List<ScheduleResponse> schedules = scheduleService.getAllSchedulesBySkuCode(List.of("event123"));
+        List<ScheduleResponse> schedules = scheduleService.getAllSchedulesBySkuCode(Arrays.asList("event123"));
 
         assertEquals(1, schedules.size());
         assertEquals("event123", schedules.get(0).getSkuCode());
 
-        verify(scheduleRepository, times(1)).findScheduleBySkuCodeIn(List.of("event123"));
+        verify(scheduleRepository, times(1)).findScheduleBySkuCodeIn(Arrays.asList("event123"));
     }
 
     // ... additional tests if necessary ...
-} 
+}
