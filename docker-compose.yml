@@ -21,9 +21,6 @@ services:
     image: mongo
     container_name: mongodb-artist
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: ${ARTIST_DB_PASSWORD}
     volumes:
       - artist_data:/data/db
     healthcheck:
