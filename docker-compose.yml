@@ -37,6 +37,11 @@ services:
       MYSQL_ROOT_PASSWORD: ${FOOD_DB_PASSWORD}
     volumes:
       - food_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysql", "-h", "localhost", "-u", "root", "-p${FOOD_DB_PASSWORD}", "-e", "SELECT 1" ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
 
   mariadb-stage:
     image: mariadb
@@ -90,7 +95,8 @@ services:
 
   food-service:
     depends_on:
-      - mysql-food
+      mysql-food:
+        condition: service_healthy
     image: willemdebie/food-service
     container_name: food-service
     ports:
