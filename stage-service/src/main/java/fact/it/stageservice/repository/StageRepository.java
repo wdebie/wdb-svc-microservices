@@ -11,4 +11,5 @@ import java.util.List;
 @Transactional
 public interface StageRepository extends JpaRepository<Stage, Long> {
     List<Stage> findBySkuCodeIn(List<String> skuCode);
+    Stage findStageByStageId(Long id);
 }

@@ -15,6 +15,16 @@ import java.util.List;
 public class ArtistController {
     private final ArtistService artistService;
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<ArtistResponse> getAllArtistsByArtistId(@RequestParam List<String> id){
+        return artistService.getAllArtistsById(id);
+    }
+
+    @GetMapping("/all")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ArtistResponse> getAllArtists(){return artistService.getAllArtists();}
+
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
     public void createArtist(
@@ -22,13 +32,17 @@ public class ArtistController {
         artistService.createArtist(artistRequest);
     }
 
-    @GetMapping
+    @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ArtistResponse> getAllArtistsBySkuCode(@RequestParam List<String> skuCode){
-        return artistService.getAllArtistsBySkuCode(skuCode);
+    public ArtistResponse update(@RequestBody ArtistRequest artistRequest){
+        return artistService.update(artistRequest);
     }
 
-    @GetMapping("/all")
-    @ResponseStatus(HttpStatus.OK)
-    public List<ArtistResponse> getAllArtists(){return artistService.getAllArtists();}
+    @DeleteMapping({"/{id}"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteArtist(@PathVariable String id){
+        artistService.delete(id);
+    }
+
+
 }

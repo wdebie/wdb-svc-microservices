@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class ScheduleRequest {
+    private Long scheduleId;
     private String skuCode;
     private LocalDateTime startTime;
     private LocalDateTime endTime;

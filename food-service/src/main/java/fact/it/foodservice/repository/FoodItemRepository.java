@@ -10,4 +10,6 @@ import java.util.List;
 @Transactional
 public interface FoodItemRepository extends JpaRepository<FoodItem, Long> {
     List<FoodItem> findBySkuCodeIn(List<String> skuCode);
+    List<FoodItem> findFoodItemByFoodTruck_FoodTruckId(Long foodTruckId);
+    FoodItem findFoodItemByFoodItemId(Long id);
 }

@@ -82,6 +82,32 @@ public class FoodItemService {
         return foodItems.stream().map(this::mapToFoodItemResponse).toList();
     }
 
+    public List<FoodItemResponse> getFoodItemsByFoodTruckId(Long foodTruckId){
+        List<FoodItem> foodItems = foodItemRepository.findFoodItemByFoodTruck_FoodTruckId(foodTruckId);
+        return foodItems.stream().map(this::mapToFoodItemResponse).toList();
+    }
+
+    public FoodItemResponse update(FoodItemRequest foodItemRequest){
+        FoodItem foodItem = foodItemRepository.findFoodItemByFoodItemId(foodItemRequest.getFoodItemId());
+        foodItem.setName(foodItemRequest.getName());
+        foodItem.setPrice(foodItemRequest.getPrice());
+        foodItem.setSkuCode(foodItemRequest.getSkuCode());
+
+        foodItemRepository.save(foodItem);
+        return FoodItemResponse.builder()
+                .foodItemId(foodItem.getFoodItemId())
+                .skuCode(foodItem.getSkuCode())
+                .name(foodItem.getName())
+                .price(foodItem.getPrice())
+                .build();
+
+    }
+
+    public void delete(Long foodItemId){
+        Long foodItemCode = foodItemRepository.findFoodItemByFoodItemId(foodItemId).getFoodItemId();
+        foodItemRepository.deleteById(foodItemCode);
+    }
+
     private FoodItemResponse mapToFoodItemResponse(FoodItem foodItem){
         return FoodItemResponse.builder()
                 .foodItemId(foodItem.getFoodItemId())
@@ -91,4 +117,5 @@ public class FoodItemService {
                 .foodTruck(foodItem.getFoodTruck())
                 .build();
     }
+
 }

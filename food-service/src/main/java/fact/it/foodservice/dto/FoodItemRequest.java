@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FoodItemRequest {
+    private Long foodItemId;
     private String skuCode;
     private String name;
     private BigDecimal price;

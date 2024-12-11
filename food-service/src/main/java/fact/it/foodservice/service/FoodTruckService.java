@@ -1,17 +1,12 @@
 package fact.it.foodservice.service;
 
-import fact.it.foodservice.dto.FoodItemRequest;
-import fact.it.foodservice.dto.FoodItemResponse;
 import fact.it.foodservice.dto.FoodTruckRequest;
 import fact.it.foodservice.dto.FoodTruckResponse;
-import fact.it.foodservice.model.FoodItem;
 import fact.it.foodservice.model.FoodTruck;
 import fact.it.foodservice.repository.FoodItemRepository;
 import fact.it.foodservice.repository.FoodTruckRepository;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -63,6 +58,27 @@ public class FoodTruckService {
         return foodTrucks.stream().map(this::mapToFoodTruckResponse).toList();
     }
 
+    public FoodTruckResponse update(FoodTruckRequest foodTruckRequest){
+        FoodTruck foodTruck = foodTruckRepository.findFoodTruckByFoodTruckId(foodTruckRequest.getFoodTruckId());
+        foodTruck.setName(foodTruckRequest.getName());
+        foodTruck.setSkuCode(foodTruckRequest.getSkuCode());
+        foodTruck.setRepName(foodTruckRequest.getRepName());
+        foodTruck.setRepPhone(foodTruckRequest.getRepPhone());
+        foodTruckRepository.save(foodTruck);
+        return FoodTruckResponse.builder()
+                .foodTruckId(foodTruck.getFoodTruckId())
+                .skuCode(foodTruck.getSkuCode())
+                .name(foodTruck.getName())
+                .repName(foodTruck.getRepName())
+                .repPhone(foodTruck.getRepPhone())
+                .build();
+    }
+
+    public void delete(Long id){
+        Long foodTruckCode = foodTruckRepository.findFoodTruckByFoodTruckId(id).getFoodTruckId();
+        foodTruckRepository.deleteById(foodTruckCode);
+    }
+
     private FoodTruckResponse mapToFoodTruckResponse(FoodTruck foodTruck){
         return FoodTruckResponse.builder()
                 .foodTruckId(foodTruck.getFoodTruckId())
@@ -73,36 +89,5 @@ public class FoodTruckService {
                 .build();
     }
 
-//    public void addFoodItemToFoodTruck(Long foodTruckId, FoodItemRequest foodItemRequest){
-//        FoodTruck foodTruck = foodTruckRepository.findById(foodTruckId)
-//                .orElseThrow(() -> new IllegalArgumentException("FoodTruck not found"));
-//
-//        FoodItem foodItem = new FoodItem();
-//        foodItem.setSkuCode(foodItemRequest.getSkuCode());
-//        foodItem.setName(foodItemRequest.getName());
-//        foodItem.setPrice(foodItemRequest.getPrice());
-//        foodItem.setFoodTruck(foodTruck);
-//
-//        foodItemRepository.save(foodItem);
-//        foodTruck.getFoodItems().add(foodItem);
-//
-//        foodTruckRepository.save(foodTruck);
-//    }
 
-//    public List<FoodItemResponse> getFoodItemsByFoodTruck(Long foodTruckId){
-//        FoodTruck foodTruck = foodTruckRepository.findById(foodTruckId)
-//                .orElseThrow(() -> new IllegalArgumentException("FoodTruck not found"));
-//
-//        return foodTruck.getFoodItems().stream()
-//                .map(this::mapToFoodItemResponse)
-//                .toList();
-//    }
-//
-//    private FoodItemResponse mapToFoodItemResponse(FoodItem foodItem) {
-//        return FoodItemResponse.builder()
-//                .foodItemId(foodItem.getFoodItemId())
-//                .name(foodItem.getName())
-//                .price(foodItem.getPrice())
-//                .build();
-//    }
 }

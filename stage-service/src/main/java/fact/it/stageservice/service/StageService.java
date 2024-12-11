@@ -54,6 +54,25 @@ public class StageService {
         return stages.stream().map(this::mapToStageResponse).toList();
     }
 
+    public StageResponse update(StageRequest stageRequest){
+        Stage stage = stageRepository.findStageByStageId(stageRequest.getStageId());
+        stage.setName(stageRequest.getName());
+        stage.setCapacity(stageRequest.getCapacity());
+        stage.setSkuCode(stageRequest.getSkuCode());
+        stageRepository.save(stage);
+        return StageResponse.builder()
+                .stageId(stage.getStageId())
+                .skuCode(stage.getSkuCode())
+                .name(stage.getName())
+                .capacity(stage.getCapacity())
+                .build();
+    }
+
+    public void delete(Long id){
+        Long stageCode = stageRepository.findStageByStageId(id).getStageId();
+        stageRepository.deleteById(stageCode);
+    }
+
     private StageResponse mapToStageResponse(Stage stage){
         return StageResponse.builder()
                 .stageId(stage.getStageId())

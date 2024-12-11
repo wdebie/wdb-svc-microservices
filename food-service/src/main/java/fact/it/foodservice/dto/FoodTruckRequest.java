@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FoodTruckRequest {
+    private Long foodTruckId;
     private String name;
     private String skuCode;
     private String repName;

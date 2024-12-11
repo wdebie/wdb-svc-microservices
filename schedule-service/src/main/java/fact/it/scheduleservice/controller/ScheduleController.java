@@ -30,4 +30,16 @@ public class ScheduleController {
     public void createSchedule(@RequestBody ScheduleRequest scheduleRequest){
         scheduleService.createSchedule(scheduleRequest);
     }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public ScheduleResponse update(@RequestBody ScheduleRequest scheduleRequest){
+        return scheduleService.update(scheduleRequest);
+    }
+
+    @DeleteMapping({"/{id}"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id){
+        scheduleService.delete(id);
+    }
 }

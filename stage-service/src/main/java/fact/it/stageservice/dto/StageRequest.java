@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StageRequest {
+    private Long stageId;
     private String skuCode;
     private String name;
     private Integer capacity;

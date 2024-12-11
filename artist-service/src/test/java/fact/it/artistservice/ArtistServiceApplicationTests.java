@@ -76,14 +76,14 @@ class ArtistServiceApplicationTests {
                 .bookingPrice(BigDecimal.valueOf(1000))
                 .build();
 
-        when(artistRepository.findBySkuCodeIn(Arrays.asList("test123"))).thenReturn(List.of(artist));
+        when(artistRepository.findByArtistIdIn(Arrays.asList("test123"))).thenReturn(List.of(artist));
 
-        List<ArtistResponse> artists = artistService.getAllArtistsBySkuCode(Arrays.asList("test123"));
+        List<ArtistResponse> artists = artistService.getAllArtistsById(Arrays.asList("test123"));
 
         assertEquals(1, artists.size());
         assertEquals("Test Artist", artists.get(0).getName());
         assertEquals("test123", artists.get(0).getSkuCode());
 
-        verify(artistRepository, times(1)).findBySkuCodeIn(Arrays.asList("test123"));
+        verify(artistRepository, times(1)).findByArtistIdIn(Arrays.asList("test123"));
     }
 }

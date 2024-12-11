@@ -5,7 +5,6 @@ import fact.it.artistservice.dto.ArtistResponse;
 import fact.it.artistservice.model.Artist;
 import fact.it.artistservice.repository.ArtistRepository;
 import jakarta.annotation.PostConstruct;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -58,9 +57,32 @@ public class ArtistService {
 
         return artists.stream().map(this::mapToArtistResponse).toList();
     }
-    public List<ArtistResponse> getAllArtistsBySkuCode(List<String> skuCode){
-        List<Artist> artists = artistRepository.findBySkuCodeIn(skuCode);
+    public List<ArtistResponse> getAllArtistsById(List<String> id){
+        List<Artist> artists = artistRepository.findByArtistIdIn(id);
         return artists.stream().map(this::mapToArtistResponse).toList();
+    }
+
+    public ArtistResponse update(ArtistRequest artistRequest){
+        Artist artist = artistRepository.findArtistByArtistId(artistRequest.getArtistId());
+        artist.setName(artistRequest.getName());
+        artist.setBookingPrice(artistRequest.getBookingPrice());
+        artist.setSkuCode(artistRequest.getSkuCode());
+        artist.setRepPhone(artistRequest.getRepPhone());
+        artist.setRepEmail(artistRequest.getRepEmail());
+        artistRepository.save(artist);
+        return ArtistResponse.builder()
+                .artistId(artist.getArtistId())
+                .skuCode(artist.getSkuCode())
+                .name(artist.getName())
+                .bookingPrice(artist.getBookingPrice())
+                .repPhone(artist.getRepPhone())
+                .repEmail(artist.getRepEmail())
+                .build();
+    }
+
+    public void delete(String id){
+        String artistId = artistRepository.findArtistByArtistId(id).getArtistId();
+        artistRepository.deleteById(artistId);
     }
 
     private ArtistResponse mapToArtistResponse(Artist artist){
