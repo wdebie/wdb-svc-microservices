@@ -59,15 +59,15 @@ spring:
           uri: http://${ARTIST_SERVICE_BASEURL:localhost:8082}
           predicates:
             - Path=/artists
-            - Methode=GET
+            - Method=GET
           filters:
             - SetPath=/api/artist/all
-            -
+
         - id: artist-service-delete
           uri: http://${ARTIST_SERVICE_BASEURL:localhost:8082}
           predicates:
             - Path=/artist/{skuCode}
-            - Methode=DELETE
+            - Method=DELETE
           filters:
             - SetPath=/api/artist/{skuCode}
 
@@ -89,7 +89,7 @@ spring:
           uri: http://${FOOD_SERVICE_BASEURL:localhost:8083}
           predicates:
             - Path=/fooditems
-            - Methode=GET
+            - Method=GET
           filters:
             - SetPath=/api/fooditem/all
 
@@ -97,7 +97,7 @@ spring:
           uri: http://${FOOD_SERVICE_BASEURL:localhost:8083}
           predicates:
             - Path=/foodtrucks
-            - Methode=GET
+            - Method=GET
           filters:
             - SetPath=/api/foodtruck/all
 
@@ -105,7 +105,7 @@ spring:
           uri: http://${FOOD_SERVICE_BASEURL:localhost:8083}
           predicates:
             - Path=/fooditem/{id}
-            - Methode=DELETE
+            - Method=DELETE
           filters:
             - SetPath=/api/fooditem/{id}
 
@@ -113,7 +113,7 @@ spring:
           uri: http://${FOOD_SERVICE_BASEURL:localhost:8083}
           predicates:
             - Path=/foodtruck/{id}
-            - Methode=DELETE
+            - Method=DELETE
           filters:
             - SetPath=/api/foodtruck/{id}
 
@@ -128,7 +128,7 @@ spring:
           uri: http://${STAGE_SERVICE_BASEURL:localhost:8084}
           predicates:
             - Path=/stages
-            - Methode=GET
+            - Method=GET
           filters:
             - SetPath=/api/stage/all
 
@@ -136,6 +136,6 @@ spring:
           uri: http://${STAGE_SERVICE_BASEURL:localhost:8084}
           predicates:
             - Path=/stage/{id}
-            - Methode=DELETE
+            - Method=DELETE
           filters:
             - SetPath=/api/stage/{id}
