@@ -76,10 +76,10 @@ function ManageArtists() {
     }
 
     return (
-        <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4">Manage Artists</h2>
+        <div className="p-4 bg-background">
+            <h2 className="text-2xl font-bold mb-4 text-foreground">Manage Artists</h2>
 
-            <form onSubmit={handleAddArtist} className="mb-6 bg-gray-800 p-4 rounded-lg">
+            <form onSubmit={handleAddArtist} className="mb-6 bg-card p-4 rounded-lg">
                 <h3 className="text-xl font-semibold mb-2">Add New Artist</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <input
@@ -130,13 +130,13 @@ function ManageArtists() {
                 </div>
                 <button
                     type="submit"
-                    className="mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+                    className="mt-4 bg-primary hover:bg-primary-foreground text-foreground px-4 py-2 rounded-lg"
                 >
                     Add Artist
                 </button>
             </form>
 
-            <table className="w-full table-auto bg-gray-800 text-white">
+            <table className="w-full table-auto bg-card text-foreground">
                 <thead>
                     <tr>
                         <th className="px-4 py-2">SKU Code</th>

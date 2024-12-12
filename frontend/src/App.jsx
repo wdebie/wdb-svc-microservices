@@ -59,7 +59,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-900 text-white">
+    <div className="min-h-screen flex flex-col bg-background text-foreground">
       <Header profile={profile} onLogin={login} onLogout={logOut} />
       <div className="flex-grow">
         <Routes>

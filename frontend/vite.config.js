@@ -9,14 +9,7 @@ export default defineConfig({
         target: 'https://api.fritfest.com',
         changeOrigin: true,
         secure: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-          'Access-Control-Allow-Credentials': 'true',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        },
+        rewrite: (path) => path.replace(/^\/api/, '')
       },
     },
   },
