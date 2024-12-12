@@ -63,8 +63,12 @@ function ManageStages() {
         }
     };
 
-    if (loading) return <div className="p-4 text-center">Loading stages...</div>;
-    if (error) return <div className="p-4 text-center text-red-500">{error}</div>;
+    if (loading) {
+        return <div className="p-4 text-center">Loading stages...</div>;
+    }
+    if (error) {
+        return <div className="p-4 text-center text-red-500">{error}</div>;
+    }
 
     return (
         <div className="p-4">
