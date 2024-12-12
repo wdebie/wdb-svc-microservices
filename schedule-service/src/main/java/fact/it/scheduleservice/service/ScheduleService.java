@@ -23,7 +23,7 @@ public class ScheduleService {
                     .skuCode("SC-EVENT-01")
                     .startTime(LocalDateTime.of(2025, 7, 19, 20, 0))
                     .endTime(LocalDateTime.of(2025, 7, 19, 22, 0))
-                    .ArtistId("1")
+                    .ArtistSkuCode("AR-MEGA-MINDY-01")
                     .StageId(1L)
                     .FoodTruckId(1L)
                     .build();
@@ -32,7 +32,7 @@ public class ScheduleService {
                     .skuCode("SC-EVENT-02")
                     .startTime(LocalDateTime.of(2025, 7, 19, 19, 0))
                     .endTime(LocalDateTime.of(2025, 7, 19, 21, 0))
-                    .ArtistId("2")
+                    .ArtistSkuCode("AR-LAURA-TESORO-01")
                     .StageId(2L)
                     .FoodTruckId(2L)
                     .build();
@@ -45,7 +45,7 @@ public class ScheduleService {
     public void createSchedule(ScheduleRequest scheduleRequest){
         Schedule schedule = Schedule.builder()
                 .skuCode(scheduleRequest.getSkuCode())
-                .ArtistId(scheduleRequest.getArtistId())
+                .ArtistSkuCode(scheduleRequest.getArtistSkuCode())
                 .FoodTruckId(scheduleRequest.getFoodTruckId())
                 .StageId(scheduleRequest.getStageId())
                 .endTime(scheduleRequest.getEndTime())
@@ -71,7 +71,7 @@ public class ScheduleService {
         schedule.setStartTime(scheduleRequest.getStartTime());
         schedule.setEndTime(scheduleRequest.getEndTime());
         schedule.setStageId(scheduleRequest.getStageId());
-        schedule.setArtistId(scheduleRequest.getArtistId());
+        schedule.setArtistSkuCode(scheduleRequest.getArtistSkuCode());
         schedule.setFoodTruckId(scheduleRequest.getFoodTruckId());
 
         scheduleRepository.save(schedule);
@@ -80,7 +80,7 @@ public class ScheduleService {
                 .skuCode(schedule.getSkuCode())
                 .endTime(schedule.getEndTime())
                 .startTime(schedule.getStartTime())
-                .ArtistId(schedule.getArtistId())
+                .ArtistSkuCode(schedule.getArtistSkuCode())
                 .StageId(schedule.getStageId())
                 .FoodTruckId(schedule.getFoodTruckId())
                 .build();
@@ -96,7 +96,7 @@ public class ScheduleService {
                 .scheduleId(schedule.getScheduleId())
                 .FoodTruckId(schedule.getFoodTruckId())
                 .StageId(schedule.getStageId())
-                .ArtistId(schedule.getArtistId())
+                .ArtistSkuCode(schedule.getArtistSkuCode())
                 .startTime(schedule.getStartTime())
                 .endTime(schedule.getEndTime())
                 .skuCode(schedule.getSkuCode())
