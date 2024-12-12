@@ -20,20 +20,20 @@ public class ScheduleService {
     public void loadData() {
         if (scheduleRepository.count() <= 0) {
             Schedule schedule1 = Schedule.builder()
-                    .skuCode("event123")
-                    .startTime(LocalDateTime.of(2023, 10, 1, 10, 0))
-                    .endTime(LocalDateTime.of(2023, 10, 1, 12, 0))
+                    .skuCode("SC-EVENT-01")
+                    .startTime(LocalDateTime.of(2025, 7, 19, 20, 0))
+                    .endTime(LocalDateTime.of(2025, 7, 19, 22, 0))
                     .ArtistId("1")
-                    .StageId(2L)
+                    .StageId(1L)
                     .FoodTruckId(1L)
                     .build();
 
             Schedule schedule2 = Schedule.builder()
-                    .skuCode("event456")
-                    .startTime(LocalDateTime.of(2023, 10, 2, 14, 0))
-                    .endTime(LocalDateTime.of(2023, 10, 2, 16, 0))
+                    .skuCode("SC-EVENT-02")
+                    .startTime(LocalDateTime.of(2025, 7, 19, 19, 0))
+                    .endTime(LocalDateTime.of(2025, 7, 19, 21, 0))
                     .ArtistId("2")
-                    .StageId(1L)
+                    .StageId(2L)
                     .FoodTruckId(2L)
                     .build();
 

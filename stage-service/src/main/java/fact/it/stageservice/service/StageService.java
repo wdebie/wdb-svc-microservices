@@ -19,12 +19,12 @@ public class StageService {
     public void loadData(){
         if (stageRepository.count()<=0){
             Stage stage = new Stage();
-            stage.setSkuCode("S1");
+            stage.setSkuCode("ST-MAIN-01");
             stage.setName("Main Stage");
             stage.setCapacity(10000);
 
             Stage stage1 = new Stage();
-            stage1.setSkuCode("S2");
+            stage1.setSkuCode("ST-FLAVOR-01");
             stage1.setName("Flavor Fields");
             stage1.setCapacity(5000);
 

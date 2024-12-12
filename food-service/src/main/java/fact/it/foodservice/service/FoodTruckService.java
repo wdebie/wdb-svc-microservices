@@ -16,26 +16,6 @@ public class FoodTruckService {
     private final FoodTruckRepository foodTruckRepository;
     private final FoodItemRepository foodItemRepository;
 
-//    @PostConstruct
-//    public void loadData(){
-//        if(foodTruckRepository.count() <= 0){
-//            FoodTruck foodTruck = new FoodTruck();
-//            foodTruck.setSkuCode("ft122");
-//            foodTruck.setName("Spaghetti Parade");
-//            foodTruck.setRepName("Mister Spaghetti");
-//            foodTruck.setRepPhone("+32 59 79 02 86");
-//
-//            FoodTruck foodTruck1 = new FoodTruck();
-//            foodTruck1.setSkuCode("parking12");
-//            foodTruck1.setName("De Parking Paellas");
-//            foodTruck1.setRepName("Mark Spanje");
-//            foodTruck1.setRepPhone("112");
-//
-//            foodTruckRepository.save(foodTruck);
-//            foodTruckRepository.save(foodTruck1);
-//        }
-//    }
-
     public void createFoodTruck(FoodTruckRequest foodTruckRequest){
         FoodTruck foodTruck = new FoodTruck();
         foodTruck.setName(foodTruckRequest.getName());

@@ -21,7 +21,7 @@ public class ArtistService {
     public void loadData(){
         if(artistRepository.count() <= 0){
             Artist artist = Artist.builder()
-                    .skuCode("megamindy123")
+                    .skuCode("AR-MEGA-MINDY-01")
                     .name("Mega Mindy")
                     .repEmail("mmm@studio100.be")
                     .repPhone("+32 (0)3 877 60 35")
@@ -29,7 +29,7 @@ public class ArtistService {
                     .build();
 
             Artist artist1 = Artist.builder()
-                    .skuCode("laura456")
+                    .skuCode("AR-LAURA-TESORO-01")
                     .name("Laura Tesoro")
                     .repEmail("kim@thebookingcompany.be")
                     .repPhone("+32 496 62 35 20")

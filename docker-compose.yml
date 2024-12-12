@@ -140,6 +140,15 @@ services:
   #     FOOD_SERVICE_BASEURL: food-service:8083
   #     STAGE_SERVICE_BASEURL: stage-service:8084
 
+
+  # START OF ADMINER TOOL
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
   # START OF DATA VOLUMES
 
 volumes:
