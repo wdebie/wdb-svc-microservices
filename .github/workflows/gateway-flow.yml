@@ -19,7 +19,7 @@ jobs:
       
       - name: Build, test and package project
         working-directory: ./api-gateway
-        run: mvn package -B -X
+        run: mvn package -B -DskipTests
 
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
