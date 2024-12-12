@@ -37,8 +37,38 @@ public class ScheduleService {
                     .FoodTruckId(2L)
                     .build();
 
+            Schedule schedule3 = Schedule.builder()
+                    .skuCode("SC-EVENT-03")
+                    .startTime(LocalDateTime.of(2025, 7, 19, 22, 30))
+                    .endTime(LocalDateTime.of(2025, 7, 20, 0, 30))
+                    .ArtistSkuCode("AR-CLOUSEAU-01")
+                    .StageId(1L)
+                    .FoodTruckId(1L)
+                    .build();
+
+            Schedule schedule4 = Schedule.builder()
+                    .skuCode("SC-EVENT-04")
+                    .startTime(LocalDateTime.of(2025, 7, 20, 19, 0))
+                    .endTime(LocalDateTime.of(2025, 7, 20, 21, 0))
+                    .ArtistSkuCode("AR-NIELS-DESTADSBADER-01")
+                    .StageId(2L)
+                    .FoodTruckId(2L)
+                    .build();
+
+            Schedule schedule5 = Schedule.builder()
+                    .skuCode("SC-EVENT-05")
+                    .startTime(LocalDateTime.of(2025, 7, 20, 22, 0))
+                    .endTime(LocalDateTime.of(2025, 7, 21, 0, 0))
+                    .ArtistSkuCode("AR-NATALIA-01")
+                    .StageId(1L)
+                    .FoodTruckId(1L)
+                    .build();
+
             scheduleRepository.save(schedule1);
             scheduleRepository.save(schedule2);
+            scheduleRepository.save(schedule3);
+            scheduleRepository.save(schedule4);
+            scheduleRepository.save(schedule5);
         }
     }
 
