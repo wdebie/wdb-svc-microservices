@@ -12,38 +12,7 @@ import ManageFoodItems from './components/Admin/ManageFoodItems';
 import ManageArtists from './components/Admin/ManageArtists';
 import ManageStages from './components/Admin/ManageStages';
 import ManageSchedules from './components/Admin/ManageSchedules';
-
-function Footer({ profile, onLogin, onLogout }) {
-  return (
-    <footer className="w-full flex justify-between items-center p-4 bg-background">
-      <div>
-        &copy; {new Date().getFullYear()} Fritfest. All rights reserved.
-      </div>
-      <div>
-        {profile ? (
-          <>
-            <Link to="/admin" className="text-foreground hover:underline mr-4">
-              Admin Dashboard
-            </Link>
-            <button
-              onClick={onLogout}
-              className="text-destructive hover:underline"
-            >
-              Log Out
-            </button>
-          </>
-        ) : (
-          <button
-            onClick={onLogin}
-            className="text-primary hover:underline"
-          >
-            Log In
-          </button>
-        )}
-      </div>
-    </footer>
-  );
-}
+import Footer from './components/Footer';
 
 function App() {
   const [user, setUser] = useState(() => {

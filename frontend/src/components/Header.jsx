@@ -26,22 +26,22 @@ function Header() {
     };
 
     return (
-        <header className="w-full flex justify-between items-center p-4 bg-background">
+        <header className="w-full flex justify-between items-center p-4 bg-card text-card-foreground">
             <Link to="/" className="text-xl font-bold">Fritfest</Link>
             <div className="flex space-x-4">
-                <Link to="/" className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">
+                <Link to="/" className="text-foreground hover:text-primary">
                     Home
                 </Link>
-                <Link to="/schedule" className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">
+                <Link to="/schedule" className="text-foreground hover:text-primary">
                     Schedule
                 </Link>
-                <Link to="/food" className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">
+                <Link to="/food" className="text-foreground hover:text-primary">
                     Food
                 </Link>
             </div>
             <button
                 onClick={toggleDarkMode}
-                className="bg-secondary hover:bg-secondary-foreground text-foreground p-2 rounded-lg"
+                className="bg-secondary hover:bg-secondary-foreground text-secondary-foreground p-2 rounded-lg"
             >
                 {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
