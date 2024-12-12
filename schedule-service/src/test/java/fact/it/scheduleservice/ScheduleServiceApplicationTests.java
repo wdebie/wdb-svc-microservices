@@ -34,7 +34,7 @@ class ScheduleServiceTests {
                 .skuCode("event123")
                 .startTime(LocalDateTime.of(2023, 10, 1, 10, 0))
                 .endTime(LocalDateTime.of(2023, 10, 1, 12, 0))
-                .ArtistId("1")
+                .ArtistSkuCode("1")
                 .StageId(2L)
                 .FoodTruckId(1L)
                 .build();
@@ -51,7 +51,7 @@ class ScheduleServiceTests {
         schedule.setSkuCode("event123");
         schedule.setStartTime(LocalDateTime.of(2023, 10, 1, 10, 0));
         schedule.setEndTime(LocalDateTime.of(2023, 10, 1, 12, 0));
-        schedule.setArtistId("1");
+        schedule.setArtistSkuCode("1");
         schedule.setStageId(2L);
         schedule.setFoodTruckId(1L);
 
@@ -72,7 +72,7 @@ class ScheduleServiceTests {
         schedule.setSkuCode("event123");
         schedule.setStartTime(LocalDateTime.of(2023, 10, 1, 10, 0));
         schedule.setEndTime(LocalDateTime.of(2023, 10, 1, 12, 0));
-        schedule.setArtistId("1");
+        schedule.setArtistSkuCode("1");
         schedule.setStageId(2L);
         schedule.setFoodTruckId(1L);
 

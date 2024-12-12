@@ -22,7 +22,7 @@ public class Schedule {
     private String skuCode;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private String ArtistId;
+    private String ArtistSkuCode;
     private Long StageId;
     private Long FoodTruckId;
 
