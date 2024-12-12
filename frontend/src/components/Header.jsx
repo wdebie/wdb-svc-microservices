@@ -38,6 +38,9 @@ function Header() {
                 <Link to="/food" className="text-foreground hover:text-primary">
                     Food
                 </Link>
+                <Link to="/lineup" className="text-foreground hover:text-primary">
+                    Lineup
+                </Link>
             </div>
             <button
                 onClick={toggleDarkMode}

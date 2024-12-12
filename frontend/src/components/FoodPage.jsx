@@ -53,20 +53,23 @@ function FoodPage() {
     return (
         <div className="p-4">
             <h2 className="text-4xl font-bold mb-8 text-center">Food Trucks</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="flex flex-col items-center space-y-8">
                 {Object.keys(groupedFood).map(truckId => (
-                    <div key={truckId} className="bg-card p-6 rounded-lg shadow-md">
-                        <h3 className="text-2xl font-semibold mb-4 text-primary">{groupedFood[truckId].truckName}</h3>
-                        <ul>
+                    <div key={truckId} className="bg-card rounded-lg shadow-lg p-6 w-full max-w-md flex flex-col items-center justify-center transform hover:rotate-3 transition duration-300">
+                        <h3 className="text-3xl font-bold text-center text-card-foreground mb-4">{groupedFood[truckId].truckName}</h3>
+                        <ul className="space-y-2">
                             {groupedFood[truckId].items.map(item => (
-                                <li key={item.foodItemId} className="mb-2">
-                                    <div className="flex justify-between">
-                                        <span>{item.name}</span>
-                                        <span className="text-muted-foreground">{item.price.toFixed(2)}€</span>
-                                    </div>
+                                <li key={item.foodItemId} className="flex justify-between w-full">
+                                    <span>{item.name}</span>
+                                    <span className="text-muted-foreground">{item.price.toFixed(2)}€</span>
                                 </li>
                             ))}
                         </ul>
+                        <div className="mt-4 text-center">
+                            <span className="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-primary-foreground mr-2">🍔</span>
+                            <span className="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-secondary-foreground mr-2">🍟</span>
+                            <span className="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-accent-foreground">🌮</span>
+                        </div>
                     </div>
                 ))}
             </div>
