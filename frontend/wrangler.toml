@@ -1,4 +1,5 @@
 name = "apt-fritfest"
+pages_build_output_dir = "dist"
 
 [vars]
 NODE_VERSION = "18.19.1"
