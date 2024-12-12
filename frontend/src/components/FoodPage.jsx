@@ -47,37 +47,29 @@ function FoodPage() {
         return <div className="p-4 text-center">Loading food items...</div>;
     }
     if (error) {
-        return <div className="p-4 text-center text-red-500">{error}</div>;
+        return <div className="p-4 text-center text-destructive">{error}</div>;
     }
 
     return (
         <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4">Food Items</h2>
-            {Object.keys(groupedFood).map(truckId => (
-                <div key={truckId} className="mb-6">
-                    <h3 className="text-xl font-semibold mb-2">{groupedFood[truckId].truckName}</h3>
-                    <table className="w-full table-auto bg-gray-800 text-white">
-                        <thead>
-                            <tr>
-                                <th className="px-4 py-2">Food Item ID</th>
-                                <th className="px-4 py-2">SKU Code</th>
-                                <th className="px-4 py-2">Name</th>
-                                <th className="px-4 py-2">Price (€)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+            <h2 className="text-4xl font-bold mb-8 text-center">Food Trucks</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {Object.keys(groupedFood).map(truckId => (
+                    <div key={truckId} className="bg-card p-6 rounded-lg shadow-md">
+                        <h3 className="text-2xl font-semibold mb-4 text-primary">{groupedFood[truckId].truckName}</h3>
+                        <ul>
                             {groupedFood[truckId].items.map(item => (
-                                <tr key={item.foodItemId}>
-                                    <td className="border px-4 py-2">{item.foodItemId}</td>
-                                    <td className="border px-4 py-2">{item.skuCode}</td>
-                                    <td className="border px-4 py-2">{item.name}</td>
-                                    <td className="border px-4 py-2">{item.price.toFixed(2)}</td>
-                                </tr>
+                                <li key={item.foodItemId} className="mb-2">
+                                    <div className="flex justify-between">
+                                        <span>{item.name}</span>
+                                        <span className="text-muted-foreground">{item.price.toFixed(2)}€</span>
+                                    </div>
+                                </li>
                             ))}
-                        </tbody>
-                    </table>
-                </div>
-            ))}
+                        </ul>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }

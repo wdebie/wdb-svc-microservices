@@ -3,18 +3,26 @@ import axios from 'axios';
 
 function SchedulePage() {
     const [schedules, setSchedules] = useState([]);
+    const [artists, setArtists] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get('/api/schedules')
-            .then(response => {
-                setSchedules(response.data);
+        Promise.all([
+            axios.get('/api/schedules'),
+            axios.get('/api/artists')
+        ])
+            .then(([schedulesResponse, artistsResponse]) => {
+                setSchedules(schedulesResponse.data);
+                setArtists(artistsResponse.data.reduce((acc, artist) => {
+                    acc[artist.skuCode] = artist;
+                    return acc;
+                }, {}));
                 setLoading(false);
             })
             .catch(err => {
                 console.error(err);
-                setError('Failed to fetch schedules.');
+                setError('Failed to fetch data.');
                 setLoading(false);
             });
     }, []);
@@ -23,38 +31,36 @@ function SchedulePage() {
         return <div className="p-4 text-center">Loading schedules...</div>;
     }
     if (error) {
-        return <div className="p-4 text-center text-red-500">{error}</div>;
+        return <div className="p-4 text-center text-destructive">{error}</div>;
     }
 
+    const groupedSchedules = schedules.reduce((acc, schedule) => {
+        const date = new Date(schedule.startTime).toLocaleDateString();
+        if (!acc[date]) {
+            acc[date] = [];
+        }
+        acc[date].push(schedule);
+        return acc;
+    }, {});
+
     return (
-        <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4">Event Schedule</h2>
-            <table className="w-full table-auto bg-gray-800 text-white">
-                <thead>
-                    <tr>
-                        <th className="px-4 py-2">Event ID</th>
-                        <th className="px-4 py-2">SKU Code</th>
-                        <th className="px-4 py-2">Start Time</th>
-                        <th className="px-4 py-2">End Time</th>
-                        <th className="px-4 py-2">Artist SKU</th>
-                        <th className="px-4 py-2">Food Truck ID</th>
-                        <th className="px-4 py-2">Stage ID</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {schedules.map(schedule => (
-                        <tr key={schedule.scheduleId}>
-                            <td className="border px-4 py-2">{schedule.scheduleId}</td>
-                            <td className="border px-4 py-2">{schedule.skuCode}</td>
-                            <td className="border px-4 py-2">{new Date(schedule.startTime).toLocaleString()}</td>
-                            <td className="border px-4 py-2">{new Date(schedule.endTime).toLocaleString()}</td>
-                            <td className="border px-4 py-2">{schedule.artistSkuCode}</td>
-                            <td className="border px-4 py-2">{schedule.foodTruckId}</td>
-                            <td className="border px-4 py-2">{schedule.stageId}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <div className="p-4 max-w-4xl mx-auto">
+            <h2 className="text-4xl font-bold mb-8 text-center">Event Schedule</h2>
+            {Object.keys(groupedSchedules).map(date => (
+                <div key={date} className="mb-8">
+                    <h3 className="text-2xl font-semibold mb-4 text-center">{date}</h3>
+                    <ul className="max-w-lg mx-auto">
+                        {groupedSchedules[date].map(schedule => (
+                            <li key={schedule.scheduleId} className="mb-2">
+                                <div className="flex justify-between">
+                                    <span className="font-semibold">{new Date(schedule.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(schedule.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                    <span className="text-primary">{artists[schedule.artistSkuCode]?.name || 'Unknown Artist'}</span>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
         </div>
     );
 }
