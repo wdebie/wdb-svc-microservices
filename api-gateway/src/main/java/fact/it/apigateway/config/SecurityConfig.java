@@ -21,6 +21,30 @@ public class SecurityConfig {
                                 .anyExchange()
                                 .authenticated()
                 )
+                .authorizeExchange(exchange ->
+                        exchange.pathMatchers(HttpMethod.GET,"/artists")
+                                .permitAll()
+                                .anyExchange()
+                                .authenticated()
+                )
+                .authorizeExchange(exchange ->
+                        exchange.pathMatchers(HttpMethod.GET,"/fooditems")
+                                .permitAll()
+                                .anyExchange()
+                                .authenticated()
+                )
+                .authorizeExchange(exchange ->
+                        exchange.pathMatchers(HttpMethod.GET,"/foodtrucks")
+                                .permitAll()
+                                .anyExchange()
+                                .authenticated()
+                )
+                .authorizeExchange(exchange ->
+                        exchange.pathMatchers(HttpMethod.GET,"/stages")
+                                .permitAll()
+                                .anyExchange()
+                                .authenticated()
+                )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(withDefaults())
                 );

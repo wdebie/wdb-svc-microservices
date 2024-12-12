@@ -11,5 +11,5 @@ import java.util.List;
 public interface ArtistRepository extends MongoRepository<Artist, String> {
     List<Artist> findByArtistIdIn(List<String> artistId);
 
-    Artist findArtistByArtistId(String id);
+    Artist findArtistBySkuCode(String skuCode);
 }

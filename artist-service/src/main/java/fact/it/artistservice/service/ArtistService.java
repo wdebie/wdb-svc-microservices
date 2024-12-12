@@ -63,10 +63,9 @@ public class ArtistService {
     }
 
     public ArtistResponse update(ArtistRequest artistRequest){
-        Artist artist = artistRepository.findArtistByArtistId(artistRequest.getArtistId());
+        Artist artist = artistRepository.findArtistBySkuCode(artistRequest.getSkuCode());
         artist.setName(artistRequest.getName());
         artist.setBookingPrice(artistRequest.getBookingPrice());
-        artist.setSkuCode(artistRequest.getSkuCode());
         artist.setRepPhone(artistRequest.getRepPhone());
         artist.setRepEmail(artistRequest.getRepEmail());
         artistRepository.save(artist);
@@ -74,15 +73,15 @@ public class ArtistService {
                 .artistId(artist.getArtistId())
                 .skuCode(artist.getSkuCode())
                 .name(artist.getName())
-                .bookingPrice(artist.getBookingPrice())
-                .repPhone(artist.getRepPhone())
-                .repEmail(artist.getRepEmail())
+//                .bookingPrice(artist.getBookingPrice())
+//                .repPhone(artist.getRepPhone())
+//                .repEmail(artist.getRepEmail())
                 .build();
     }
 
-    public void delete(String id){
-        String artistId = artistRepository.findArtistByArtistId(id).getArtistId();
-        artistRepository.deleteById(artistId);
+    public void delete(String skuCode){
+        String artistCode = artistRepository.findArtistBySkuCode(skuCode).getArtistId();
+        artistRepository.deleteById(artistCode);
     }
 
     private ArtistResponse mapToArtistResponse(Artist artist){
@@ -90,9 +89,9 @@ public class ArtistService {
                 .artistId(artist.getArtistId())
                 .skuCode(artist.getSkuCode())
                 .name(artist.getName())
-                .repEmail(artist.getRepEmail())
-                .repPhone(artist.getRepPhone())
-                .bookingPrice(artist.getBookingPrice())
+//                .repEmail(artist.getRepEmail())
+//                .repPhone(artist.getRepPhone())
+//                .bookingPrice(artist.getBookingPrice())
                 .build();
     }
 }
