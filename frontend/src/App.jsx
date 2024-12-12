@@ -7,13 +7,27 @@ import LandingPage from './components/LandingPage';
 import AdminDashboard from './components/AdminDashboard';
 import SchedulePage from './components/SchedulePage';
 import FoodPage from './components/FoodPage';
+import ManageFoodTrucks from './components/Admin/ManageFoodTrucks';
+import ManageFoodItems from './components/Admin/ManageFoodItems';
+import ManageArtists from './components/Admin/ManageArtists';
+import ManageStages from './components/Admin/ManageStages';
+import ManageSchedules from './components/Admin/ManageSchedules';
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    // Retrieve user from local storage if available
+    const savedUser = localStorage.getItem('user');
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
   const [profile, setProfile] = useState(null);
 
   const login = useGoogleLogin({
-    onSuccess: (codeResponse) => setUser(codeResponse),
+    onSuccess: (codeResponse) => {
+      setUser(codeResponse);
+      localStorage.setItem('user', JSON.stringify(codeResponse));
+      localStorage.setItem('token', codeResponse.access_token);
+      console.log(codeResponse.access_token);
+    },
     onError: (error) => console.log('Login Failed:', error)
   });
 
@@ -40,6 +54,8 @@ function App() {
     googleLogout();
     setUser(null);
     setProfile(null);
+    // Clear user from local storage
+    localStorage.removeItem('user');
   };
 
   return (
@@ -49,9 +65,15 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route
-            path="/admin"
+            path="/admin/*"
             element={profile ? <AdminDashboard /> : <Navigate to="/" />}
-          />
+          >
+            <Route path="foodtrucks" element={<ManageFoodTrucks />} />
+            <Route path="fooditems" element={<ManageFoodItems />} />
+            <Route path="artists" element={<ManageArtists />} />
+            <Route path="stages" element={<ManageStages />} />
+            <Route path="schedules" element={<ManageSchedules />} />
+          </Route>
           <Route path="/schedule" element={<SchedulePage />} />
           <Route path="/food" element={<FoodPage />} />
         </Routes>
