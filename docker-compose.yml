@@ -124,21 +124,21 @@ services:
 
   # START OF API GATEWAY
 
-  # api-gateway:
-  #   depends_on:
-  #     - schedule-service
-  #     - artist-service
-  #     - food-service
-  #     - stage-service
-  #   image: willemdebie/api-gateway
-  #   container_name: api-gateway
-  #   ports:
-  #     - 8080:8080
-  #   environment:
-  #     SCHEDULE_SERVICE_BASEURL: schedule-service:8081
-  #     ARTIST_SERVICE_BASEURL: artist-service:8082
-  #     FOOD_SERVICE_BASEURL: food-service:8083
-  #     STAGE_SERVICE_BASEURL: stage-service:8084
+  api-gateway:
+   depends_on:
+     - schedule-service
+     - artist-service
+     - food-service
+     - stage-service
+   image: willemdebie/api-gateway
+   container_name: api-gateway
+   ports:
+     - 8080:8080
+   environment:
+     SCHEDULE_SERVICE_BASEURL: schedule-service:8081
+     ARTIST_SERVICE_BASEURL: artist-service:8082
+     FOOD_SERVICE_BASEURL: food-service:8083
+     STAGE_SERVICE_BASEURL: stage-service:8084
 
 
   # START OF ADMINER TOOL
@@ -147,7 +147,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 8090:8080
 
   # START OF DATA VOLUMES
 
