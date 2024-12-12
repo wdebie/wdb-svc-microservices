@@ -20,13 +20,13 @@ public class StageService {
         if (stageRepository.count()<=0){
             Stage stage = new Stage();
             stage.setSkuCode("S1");
-            stage.setName("Stage 1");
-            stage.setCapacity(100);
+            stage.setName("Main Stage");
+            stage.setCapacity(10000);
 
             Stage stage1 = new Stage();
             stage1.setSkuCode("S2");
-            stage1.setName("Stage 2");
-            stage1.setCapacity(200);
+            stage1.setName("Flavor Fields");
+            stage1.setCapacity(5000);
 
             stageRepository.save(stage);
             stageRepository.save(stage1);
