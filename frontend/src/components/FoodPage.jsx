@@ -8,7 +8,7 @@ function FoodPage() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get('/api/fooditems')
+        axios.get('/fooditems', { baseURL: 'https://api.fritfest.com', secure: true, changeOrigin: true })
             .then(response => {
                 const items = response.data;
                 setFoodItems(items);
