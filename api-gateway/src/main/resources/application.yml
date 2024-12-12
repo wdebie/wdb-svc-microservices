@@ -120,7 +120,7 @@ spring:
         - id: stage-service
           uri: http://${STAGE_SERVICE_BASEURL:localhost:8084}
           predicates:
-            - Path=/stages
+            - Path=/stage
           filters:
             - SetPath=/api/stage
 
