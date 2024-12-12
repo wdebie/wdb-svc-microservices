@@ -10,9 +10,9 @@ function SchedulePage() {
 
     useEffect(() => {
         Promise.all([
-            axios.get('/api/schedules'),
-            axios.get('/api/artists'),
-            axios.get('/api/stages')
+            axios.get('https://api.fritfest.com/schedules'),
+            axios.get('https://api.fritfest.com/artists'),
+            axios.get('https://api.fritfest.com/stages')
         ])
             .then(([schedulesResponse, artistsResponse, stagesResponse]) => {
                 setSchedules(schedulesResponse.data);

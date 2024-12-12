@@ -18,7 +18,7 @@ function ManageArtists() {
 
     const fetchArtists = async () => {
         try {
-            const response = await axios.get('/api/artists');
+            const response = await axios.get('https://api.fritfest.com/artists');
             if (Array.isArray(response.data)) {
                 setArtists(response.data);
             } else {
@@ -41,7 +41,7 @@ function ManageArtists() {
     const handleAddArtist = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/artist', newArtist);
+            const response = await axios.post('https://api.fritfest.com/artist', newArtist);
             setArtists([...artists, response.data]);
             setNewArtist({
                 skuCode: '',
@@ -59,7 +59,7 @@ function ManageArtists() {
     const handleDeleteArtist = async (skuCode) => {
         if (window.confirm('Are you sure you want to delete this artist?')) {
             try {
-                await axios.delete(`/api/artist/${skuCode}`);
+                await axios.delete(`https://api.fritfest.com/artist/${skuCode}`);
                 setArtists(artists.filter(artist => artist.skuCode !== skuCode));
             } catch (err) {
                 console.error(err);

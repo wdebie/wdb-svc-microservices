@@ -18,7 +18,7 @@ function ManageFoodTrucks() {
 
     const fetchFoodTrucks = async () => {
         try {
-            const response = await axios.get('/api/foodtrucks');
+            const response = await axios.get('https://api.fritfest.com/foodtrucks');
             setFoodTrucks(response.data);
             setLoading(false);
         } catch (err) {
@@ -36,7 +36,7 @@ function ManageFoodTrucks() {
     const handleAddTruck = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/foodtrucks', newTruck);
+            const response = await axios.post('https://api.fritfest.com/foodtrucks', newTruck);
             setFoodTrucks([...foodTrucks, response.data]);
             setNewTruck({
                 name: '',
@@ -53,7 +53,7 @@ function ManageFoodTrucks() {
     const handleDeleteTruck = async (id) => {
         if (window.confirm('Are you sure you want to delete this food truck?')) {
             try {
-                await axios.delete(`/api/foodtruck/${id}`);
+                await axios.delete(`https://api.fritfest.com/foodtruck/${id}`);
                 setFoodTrucks(foodTrucks.filter(truck => truck.foodTruckId !== id));
             } catch (err) {
                 console.error(err);

@@ -7,7 +7,7 @@ function LineupPage() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get('/api/artists')
+        axios.get('https://api.fritfest.com/artists')
             .then(response => {
                 setArtists(response.data);
                 setLoading(false);

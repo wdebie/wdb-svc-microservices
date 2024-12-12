@@ -17,7 +17,7 @@ function ManageStages() {
 
     const fetchStages = async () => {
         try {
-            const response = await axios.get('/api/stages');
+            const response = await axios.get('https://api.fritfest.com/stages');
             setStages(response.data);
             setLoading(false);
         } catch (err) {
@@ -35,7 +35,7 @@ function ManageStages() {
     const handleAddStage = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/stages', {
+            const response = await axios.post('https://api.fritfest.com/stages', {
                 ...newStage,
                 capacity: parseInt(newStage.capacity)
             });
@@ -54,7 +54,7 @@ function ManageStages() {
     const handleDeleteStage = async (id) => {
         if (window.confirm('Are you sure you want to delete this stage?')) {
             try {
-                await axios.delete(`/api/stage/${id} `);
+                await axios.delete(`https://api.fritfest.com/stage/${id} `);
                 setStages(stages.filter(stage => stage.stageId !== id));
             } catch (err) {
                 console.error(err);

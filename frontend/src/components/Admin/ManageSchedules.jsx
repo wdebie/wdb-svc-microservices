@@ -20,7 +20,7 @@ function ManageSchedules() {
 
     const fetchSchedules = async () => {
         try {
-            const response = await axios.get('/api/schedules');
+            const response = await axios.get('https://api.fritfest.com/schedules');
             setSchedules(response.data);
             setLoading(false);
         } catch (err) {
@@ -38,7 +38,7 @@ function ManageSchedules() {
     const handleAddSchedule = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/schedules', {
+            const response = await axios.post('https://api.fritfest.com/schedules', {
                 ...newSchedule,
                 startTime: new Date(newSchedule.startTime).toISOString(),
                 endTime: new Date(newSchedule.endTime).toISOString(),
@@ -63,7 +63,7 @@ function ManageSchedules() {
     const handleDeleteSchedule = async (id) => {
         if (window.confirm('Are you sure you want to delete this schedule?')) {
             try {
-                await axios.delete(`/api/schedule/${id}`);
+                await axios.delete(`https://api.fritfest.com/schedule/${id}`);
                 setSchedules(schedules.filter(schedule => schedule.scheduleId !== id));
             } catch (err) {
                 console.error(err);

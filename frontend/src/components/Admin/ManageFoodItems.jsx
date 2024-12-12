@@ -18,7 +18,7 @@ function ManageFoodItems() {
 
     const fetchFoodItems = async () => {
         try {
-            const response = await axios.get('/api/fooditems');
+            const response = await axios.get('https://api.fritfest.com/fooditems');
             setFoodItems(response.data);
             setLoading(false);
         } catch (err) {
@@ -36,7 +36,7 @@ function ManageFoodItems() {
     const handleAddFoodItem = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/fooditems', {
+            const response = await axios.post('https://api.fritfest.com/fooditems', {
                 ...newFoodItem,
                 price: parseFloat(newFoodItem.price),
                 foodTruckId: parseInt(newFoodItem.foodTruckId)
@@ -57,7 +57,7 @@ function ManageFoodItems() {
     const handleDeleteFoodItem = async (id) => {
         if (window.confirm('Are you sure you want to delete this food item?')) {
             try {
-                await axios.delete(`/api/fooditem/${id}`, {
+                await axios.delete(`https://api.fritfest.com/fooditem/${id}`, {
                     headers: {
                         "Content-type": "application/json",
                         "Authorization": `Bearer ${localStorage.getItem('token')}`
