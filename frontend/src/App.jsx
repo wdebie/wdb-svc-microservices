@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Link } from 'react-router-dom';
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import AdminDashboard from './components/AdminDashboard';
@@ -12,6 +12,38 @@ import ManageFoodItems from './components/Admin/ManageFoodItems';
 import ManageArtists from './components/Admin/ManageArtists';
 import ManageStages from './components/Admin/ManageStages';
 import ManageSchedules from './components/Admin/ManageSchedules';
+
+function Footer({ profile, onLogin, onLogout }) {
+  return (
+    <footer className="w-full flex justify-between items-center p-4 bg-background">
+      <div>
+        &copy; {new Date().getFullYear()} Fritfest. All rights reserved.
+      </div>
+      <div>
+        {profile ? (
+          <>
+            <Link to="/admin" className="text-foreground hover:underline mr-4">
+              Admin Dashboard
+            </Link>
+            <button
+              onClick={onLogout}
+              className="text-destructive hover:underline"
+            >
+              Log Out
+            </button>
+          </>
+        ) : (
+          <button
+            onClick={onLogin}
+            className="text-primary hover:underline"
+          >
+            Log In
+          </button>
+        )}
+      </div>
+    </footer>
+  );
+}
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -60,7 +92,7 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <Header profile={profile} onLogin={login} onLogout={logOut} />
+      <Header />
       <div className="flex-grow">
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -78,6 +110,7 @@ function App() {
           <Route path="/food" element={<FoodPage />} />
         </Routes>
       </div>
+      <Footer profile={profile} onLogin={login} onLogout={logOut} />
     </div>
   );
 }
