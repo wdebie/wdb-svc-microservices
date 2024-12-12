@@ -1,0 +1,4 @@
+name = "apt-fritfest"
+
+[vars]
+NODE_VERSION = "18.19.1"
