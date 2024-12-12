@@ -16,31 +16,7 @@ public class SecurityConfig {
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
         serverHttpSecurity
                 .authorizeExchange(exchange ->
-                        exchange.pathMatchers(HttpMethod.GET,"/schedules")
-                                .permitAll()
-                                .anyExchange()
-                                .authenticated()
-                )
-                .authorizeExchange(exchange ->
-                        exchange.pathMatchers(HttpMethod.GET,"/artists")
-                                .permitAll()
-                                .anyExchange()
-                                .authenticated()
-                )
-                .authorizeExchange(exchange ->
-                        exchange.pathMatchers(HttpMethod.GET,"/fooditems")
-                                .permitAll()
-                                .anyExchange()
-                                .authenticated()
-                )
-                .authorizeExchange(exchange ->
-                        exchange.pathMatchers(HttpMethod.GET,"/foodtrucks")
-                                .permitAll()
-                                .anyExchange()
-                                .authenticated()
-                )
-                .authorizeExchange(exchange ->
-                        exchange.pathMatchers(HttpMethod.GET,"/stages")
+                        exchange.pathMatchers(HttpMethod.GET, "/schedules", "/artists", "/fooditems", "/foodtrucks", "/stages")
                                 .permitAll()
                                 .anyExchange()
                                 .authenticated()
