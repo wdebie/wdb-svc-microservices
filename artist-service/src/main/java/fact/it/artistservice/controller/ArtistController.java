@@ -38,10 +38,10 @@ public class ArtistController {
         return artistService.update(artistRequest);
     }
 
-    @DeleteMapping({"/{id}"})
+    @DeleteMapping({"/{skuCode}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteArtist(@PathVariable String id){
-        artistService.delete(id);
+    public void deleteArtist(@PathVariable String skuCode){
+        artistService.delete(skuCode);
     }
 
 
