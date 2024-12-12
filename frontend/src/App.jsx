@@ -5,6 +5,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import AdminDashboard from './components/AdminDashboard';
+import SchedulePage from './components/SchedulePage';
+import FoodPage from './components/FoodPage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -50,6 +52,8 @@ function App() {
             path="/admin"
             element={profile ? <AdminDashboard /> : <Navigate to="/" />}
           />
+          <Route path="/schedule" element={<SchedulePage />} />
+          <Route path="/food" element={<FoodPage />} />
         </Routes>
       </div>
     </div>

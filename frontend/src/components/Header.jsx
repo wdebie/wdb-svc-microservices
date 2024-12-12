@@ -6,6 +6,12 @@ function Header({ profile, onLogin, onLogout }) {
         <header className="w-full flex justify-between items-center p-4 bg-gray-800">
             <h1 className="text-xl font-bold">Fritfest</h1>
             <div className="flex space-x-4">
+                <Link to="/schedule" className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">
+                    Schedule
+                </Link>
+                <Link to="/food" className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg">
+                    Food
+                </Link>
                 {profile && (
                     <Link to="/admin" className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
                         Admin Dashboard
