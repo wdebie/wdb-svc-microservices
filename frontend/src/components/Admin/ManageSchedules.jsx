@@ -10,7 +10,6 @@ function ManageSchedules() {
     startTime: "",
     endTime: "",
     artistSkuCode: "",
-    foodTruckId: "",
     stageId: "",
   });
 
@@ -39,12 +38,12 @@ function ManageSchedules() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://api.fritfest.com/schedules",
+        "https://api.fritfest.com/schedule",
         {
           ...newSchedule,
           startTime: new Date(newSchedule.startTime).toISOString(),
           endTime: new Date(newSchedule.endTime).toISOString(),
-          foodTruckId: parseInt(newSchedule.foodTruckId),
+          foodTruckId: null,
           stageId: parseInt(newSchedule.stageId),
         },
         {
@@ -60,7 +59,6 @@ function ManageSchedules() {
         startTime: "",
         endTime: "",
         artistSkuCode: "",
-        foodTruckId: "",
         stageId: "",
       });
     } catch (err) {
@@ -142,15 +140,6 @@ function ManageSchedules() {
           />
           <input
             type="number"
-            name="foodTruckId"
-            value={newSchedule.foodTruckId}
-            onChange={handleInputChange}
-            placeholder="Food Truck ID"
-            required
-            className="p-2 rounded bg-gray-700 text-white"
-          />
-          <input
-            type="number"
             name="stageId"
             value={newSchedule.stageId}
             onChange={handleInputChange}
@@ -175,7 +164,6 @@ function ManageSchedules() {
             <th className="px-4 py-2">Start Time</th>
             <th className="px-4 py-2">End Time</th>
             <th className="px-4 py-2">Artist SKU</th>
-            <th className="px-4 py-2">Food Truck ID</th>
             <th className="px-4 py-2">Stage ID</th>
             <th className="px-4 py-2">Actions</th>
           </tr>
@@ -192,7 +180,6 @@ function ManageSchedules() {
                 {new Date(schedule.endTime).toLocaleString()}
               </td>
               <td className="border px-4 py-2">{schedule.artistSkuCode}</td>
-              <td className="border px-4 py-2">{schedule.foodTruckId}</td>
               <td className="border px-4 py-2">{schedule.stageId}</td>
               <td className="border px-4 py-2">
                 <button

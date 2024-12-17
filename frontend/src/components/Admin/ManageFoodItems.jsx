@@ -37,7 +37,7 @@ function ManageFoodItems() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://api.fritfest.com/fooditems",
+        "https://api.fritfest.com/fooditem",
         {
           ...newFoodItem,
           price: parseFloat(newFoodItem.price),

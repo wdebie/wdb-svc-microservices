@@ -36,7 +36,7 @@ function ManageStages() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://api.fritfest.com/stages",
+        "https://api.fritfest.com/stage",
         {
           ...newStage,
           capacity: parseInt(newStage.capacity),

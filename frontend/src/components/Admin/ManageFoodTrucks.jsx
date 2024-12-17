@@ -37,7 +37,7 @@ function ManageFoodTrucks() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://api.fritfest.com/foodtrucks",
+        "https://api.fritfest.com/foodtruck",
         newTruck,
         {
           headers: {
