@@ -15,6 +15,13 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
         serverHttpSecurity
+                .cors(cors -> cors.configurationSource(request -> {
+                    var config = new CorsConfiguration();
+                    config.addAllowedOrigin("*");
+                    config.addAllowedMethod("*");
+                    config.addAllowedHeader("*");
+                    return config;
+                }))
                 .authorizeExchange(exchange ->
                         exchange.pathMatchers(HttpMethod.GET, "/schedules", "/artists", "/fooditems", "/foodtrucks", "/stages")
                                 .permitAll()
@@ -24,7 +31,6 @@ public class SecurityConfig {
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(withDefaults())
                 )
-                .cors().disable();
         return serverHttpSecurity.build();
     }
 }
