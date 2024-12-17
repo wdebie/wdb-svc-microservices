@@ -17,8 +17,8 @@ public class FoodItemController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public void createFoodItem(@RequestBody FoodItemRequest foodItemRequest, @RequestParam(required = false) Long foodTruckId){
-        foodItemService.createFoodItem(foodItemRequest,foodTruckId);
+    public void createFoodItem(@RequestBody FoodItemRequest foodItemRequest){
+        foodItemService.createFoodItem(foodItemRequest);
     }
 
     @GetMapping

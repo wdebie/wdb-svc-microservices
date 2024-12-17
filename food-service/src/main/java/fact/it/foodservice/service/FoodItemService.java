@@ -82,16 +82,21 @@ public class FoodItemService {
         }
     }
 
-    public void createFoodItem(FoodItemRequest foodItemRequest, Long foodTruckId){
+    public void createFoodItem(FoodItemRequest foodItemRequest){
         FoodItem foodItem = new FoodItem();
         foodItem.setSkuCode(foodItemRequest.getSkuCode());
         foodItem.setPrice(foodItemRequest.getPrice());
         foodItem.setName(foodItemRequest.getName());
 
-        if (foodTruckId != null) {
-            FoodTruck foodTruck = foodTruckRepository.findById(foodTruckId)
-                    .orElseThrow(() -> new IllegalArgumentException("FoodTruck not found"));
-            foodItem.setFoodTruck(foodTruck);
+        if(foodItemRequest.getFoodTruck() != null){
+            Long foodTruckId = foodItemRequest.getFoodTruck().getFoodTruckId();
+            if(foodTruckId != null){
+                FoodTruck foodTruck = foodTruckRepository.findFoodTruckByFoodTruckId(foodTruckId);
+                if(foodTruck == null){
+                    throw new IllegalArgumentException("No FoodTruck found with ID: " + foodTruckId);
+                }
+                foodItem.setFoodTruck(foodTruck);
+            }
         }
 
         foodItemRepository.save(foodItem);
