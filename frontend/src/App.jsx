@@ -56,10 +56,7 @@ function App() {
         setUser(userInfo);
         localStorage.setItem("user", JSON.stringify(userInfo));
         localStorage.setItem("token", access_token);
-        localStorage.setItem("jwt", id_token); // Save JWT to local storage
-
-        console.log("Access Token:", access_token); // Short-lived, non-JWT
-        console.log("ID Token (JWT):", id_token); // JWT for authentication
+        localStorage.setItem("jwt", id_token);
 
         // Fetch user profile information
         const profileResponse = await axios.get(
