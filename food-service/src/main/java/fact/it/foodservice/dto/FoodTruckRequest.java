@@ -18,6 +18,4 @@ public class FoodTruckRequest {
     private String skuCode;
     private String repName;
     private String repPhone;
-
-    private List<FoodItem> foodItemsList;
 }
