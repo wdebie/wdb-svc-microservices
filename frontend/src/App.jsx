@@ -115,7 +115,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-900 text-white">
       <Header profile={profile} onLogin={login} onLogout={logOut} />
-      <div className="flex-grow">
+      <div className="flex-grow flex">
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route

@@ -20,14 +20,14 @@ function LineupPage() {
     }, []);
 
     if (loading) {
-        return <div className="p-4 text-center">Loading artists...</div>;
+        return <div className="p-4 max-w-4xl mx-auto text-center">Loading artists...</div>;
     }
     if (error) {
-        return <div className="p-4 text-center text-destructive">{error}</div>;
+        return <div className="p-4 max-w-4xl mx-auto text-center text-destructive">{error}</div>;
     }
 
     return (
-        <div className="p-4">
+        <div className="p-4 max-w-4xl mx-auto">
             <h2 className="text-4xl font-bold mb-8 text-center">Artist Lineup</h2>
             <div className="flex flex-col items-center space-y-8">
                 {artists.map(artist => (
