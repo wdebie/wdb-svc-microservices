@@ -15,4 +15,5 @@ public class FoodItemRequest {
     private String skuCode;
     private String name;
     private BigDecimal price;
+    private FoodTruckRequest foodTruck;
 }

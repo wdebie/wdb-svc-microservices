@@ -165,4 +165,4 @@ volumes:
 
 networks:
   wlinetwork:
-    external: true
+    external: false

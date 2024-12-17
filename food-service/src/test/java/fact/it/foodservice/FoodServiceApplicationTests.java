@@ -47,7 +47,7 @@ class FoodServiceApplicationTests {
                 .price(BigDecimal.valueOf(9.99))
                 .build();
 
-        foodItemService.createFoodItem(foodItemRequest, null);
+        foodItemService.createFoodItem(foodItemRequest);
 
         verify(foodItemRepository, times(1)).save(any(FoodItem.class));
     }
