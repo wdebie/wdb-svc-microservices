@@ -6,9 +6,10 @@ function ManageArtists() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [newArtist, setNewArtist] = useState({
-    skuCode: "",
     name: "",
     repEmail: "",
+    repPhone: "",
+    bookingPrice: "",
   });
 
   useEffect(() => {
@@ -37,12 +38,21 @@ function ManageArtists() {
     setNewArtist({ ...newArtist, [name]: value });
   };
 
+  const generateSkuCode = () => {
+    const timestamp = new Date().getTime();
+    return `ART-${timestamp}`;
+  };
+
   const handleAddArtist = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://api.fritfest.com/artist",
-        newArtist,
+        {
+          ...newArtist,
+          skuCode: generateSkuCode(),
+          bookingPrice: parseFloat(newArtist.bookingPrice),
+        },
         {
           headers: {
             "Content-Type": "application/json; charset=UTF-8",
@@ -50,14 +60,13 @@ function ManageArtists() {
           },
         }
       );
-      setArtists([...artists, response.data]);
       setNewArtist({
-        skuCode: "",
         name: "",
         repEmail: "",
         repPhone: "",
-        bookingPrice: 0.0,
+        bookingPrice: "",
       });
+      await fetchArtists();
     } catch (err) {
       console.error(err);
       setError("Failed to add artist.");
@@ -72,7 +81,7 @@ function ManageArtists() {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
         });
-        setArtists(artists.filter((artist) => artist.skuCode !== skuCode));
+        await fetchArtists();
       } catch (err) {
         console.error(err);
         setError("Failed to delete artist.");
@@ -81,30 +90,19 @@ function ManageArtists() {
   };
 
   if (loading) {
-    return <div className="p-4 text-center">Loading artists...</div>;
+    return <div className="p-4 max-w-4xl mx-auto text-center">Loading artists...</div>;
   }
   if (error) {
-    return <div className="p-4 text-center text-red-500">{error}</div>;
+    return <div className="p-4 max-w-4xl mx-auto text-center text-red-500">{error}</div>;
   }
 
   return (
-    <div className="p-4 bg-background">
-      <h2 className="text-2xl font-bold mb-4 text-foreground">
-        Manage Artists
-      </h2>
+    <div className="p-4 max-w-4xl mx-auto">
+      <h2 className="text-2xl font-bold mb-4">Manage Artists</h2>
 
-      <form onSubmit={handleAddArtist} className="mb-6 bg-card p-4 rounded-lg">
+      <form onSubmit={handleAddArtist} className="mb-6 bg-gray-800 p-4 rounded-lg">
         <h3 className="text-xl font-semibold mb-2">Add New Artist</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            type="text"
-            name="skuCode"
-            value={newArtist.skuCode}
-            onChange={handleInputChange}
-            placeholder="SKU Code"
-            required
-            className="p-2 rounded bg-gray-700 text-white"
-          />
           <input
             type="text"
             name="name"
@@ -134,6 +132,7 @@ function ManageArtists() {
           />
           <input
             type="number"
+            step="0.01"
             name="bookingPrice"
             value={newArtist.bookingPrice}
             onChange={handleInputChange}
@@ -144,28 +143,23 @@ function ManageArtists() {
         </div>
         <button
           type="submit"
-          className="mt-4 bg-primary hover:bg-primary-foreground text-foreground px-4 py-2 rounded-lg"
+          className="mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
         >
           Add Artist
         </button>
       </form>
 
-      <table className="w-full table-auto bg-card text-foreground">
+      <table className="w-full table-auto bg-gray-800 text-white">
         <thead>
           <tr>
-            <th className="px-4 py-2">SKU Code</th>
             <th className="px-4 py-2">Name</th>
-            <th className="px-4 py-2">Contact Email</th>
             <th className="px-4 py-2">Actions</th>
           </tr>
         </thead>
         <tbody>
           {artists.map((artist) => (
             <tr key={artist.skuCode}>
-              <td className="border px-4 py-2">{artist.skuCode}</td>
               <td className="border px-4 py-2">{artist.name}</td>
-
-              <td className="border px-4 py-2">{artist.repEmail}</td>
               <td className="border px-4 py-2">
                 <button
                   onClick={() => handleDeleteArtist(artist.skuCode)}

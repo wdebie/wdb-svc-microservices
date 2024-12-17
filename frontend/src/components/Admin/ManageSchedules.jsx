@@ -58,13 +58,19 @@ function ManageSchedules() {
     setNewSchedule({ ...newSchedule, [name]: value });
   };
 
+  const generateSkuCode = () => {
+    const timestamp = new Date().getTime();
+    return `SCH-${timestamp}`;
+  };
+
   const handleAddSchedule = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://api.fritfest.com/schedule",
         {
           ...newSchedule,
+          skuCode: generateSkuCode(),
           startTime: new Date(newSchedule.startTime).toISOString(),
           endTime: new Date(newSchedule.endTime).toISOString(),
           foodTruckId: null,
@@ -77,7 +83,6 @@ function ManageSchedules() {
           },
         }
       );
-      setSchedules([...schedules, response.data]);
       setNewSchedule({
         skuCode: "",
         startTime: "",
@@ -85,6 +90,7 @@ function ManageSchedules() {
         artistSkuCode: "",
         stageId: "",
       });
+      await fetchSchedules();
     } catch (err) {
       console.error(err);
       setError("Failed to add schedule.");
@@ -99,9 +105,7 @@ function ManageSchedules() {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
         });
-        setSchedules(
-          schedules.filter((schedule) => schedule.scheduleId !== id)
-        );
+        await fetchSchedules();
       } catch (err) {
         console.error(err);
         setError("Failed to delete schedule.");
@@ -110,14 +114,14 @@ function ManageSchedules() {
   };
 
   if (loading) {
-    return <div className="p-4 text-center">Loading schedules...</div>;
+    return <div className="p-4 max-w-4xl mx-auto text-center">Loading schedules...</div>;
   }
   if (error) {
-    return <div className="p-4 text-center text-red-500">{error}</div>;
+    return <div className="p-4 max-w-4xl mx-auto text-center text-red-500">{error}</div>;
   }
 
   return (
-    <div className="p-4">
+    <div className="p-4 max-w-4xl mx-auto">
       <h2 className="text-2xl font-bold mb-4">Manage Schedules</h2>
 
       <form
@@ -126,15 +130,6 @@ function ManageSchedules() {
       >
         <h3 className="text-xl font-semibold mb-2">Add New Schedule</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <input
-            type="text"
-            name="skuCode"
-            value={newSchedule.skuCode}
-            onChange={handleInputChange}
-            placeholder="SKU Code"
-            required
-            className="p-2 rounded bg-gray-700 text-white"
-          />
           <input
             type="datetime-local"
             name="startTime"
@@ -194,37 +189,39 @@ function ManageSchedules() {
         <thead>
           <tr>
             <th className="px-4 py-2">ID</th>
-            <th className="px-4 py-2">SKU Code</th>
             <th className="px-4 py-2">Start Time</th>
             <th className="px-4 py-2">End Time</th>
-            <th className="px-4 py-2">Artist SKU</th>
-            <th className="px-4 py-2">Stage ID</th>
+            <th className="px-4 py-2">Artist</th>
+            <th className="px-4 py-2">Stage</th>
             <th className="px-4 py-2">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {schedules.map((schedule) => (
-            <tr key={schedule.scheduleId}>
-              <td className="border px-4 py-2">{schedule.scheduleId}</td>
-              <td className="border px-4 py-2">{schedule.skuCode}</td>
-              <td className="border px-4 py-2">
-                {new Date(schedule.startTime).toLocaleString()}
-              </td>
-              <td className="border px-4 py-2">
-                {new Date(schedule.endTime).toLocaleString()}
-              </td>
-              <td className="border px-4 py-2">{schedule.artistSkuCode}</td>
-              <td className="border px-4 py-2">{schedule.stageId}</td>
-              <td className="border px-4 py-2">
-                <button
-                  onClick={() => handleDeleteSchedule(schedule.scheduleId)}
-                  className="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+          {schedules.map((schedule) => {
+            const artist = artists.find((artist) => artist.skuCode === schedule.artistSkuCode);
+            const stage = stages.find((stage) => stage.stageId === schedule.stageId);
+            return (
+              <tr key={schedule.scheduleId}>
+                <td className="border px-4 py-2">{schedule.scheduleId}</td>
+                <td className="border px-4 py-2">
+                  {new Date(schedule.startTime).toLocaleDateString()} {new Date(schedule.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </td>
+                <td className="border px-4 py-2">
+                  {new Date(schedule.endTime).toLocaleDateString()} {new Date(schedule.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </td>
+                <td className="border px-4 py-2">{artist ? artist.name : "Unknown Artist"}</td>
+                <td className="border px-4 py-2">{stage ? stage.name : "Unknown Stage"}</td>
+                <td className="border px-4 py-2">
+                  <button
+                    onClick={() => handleDeleteSchedule(schedule.scheduleId)}
+                    className="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

@@ -7,7 +7,6 @@ function ManageFoodTrucks() {
   const [error, setError] = useState(null);
   const [newTruck, setNewTruck] = useState({
     name: "",
-    skuCode: "",
     repName: "",
     repPhone: "",
   });
@@ -33,12 +32,20 @@ function ManageFoodTrucks() {
     setNewTruck({ ...newTruck, [name]: value });
   };
 
+  const generateSkuCode = () => {
+    const timestamp = new Date().getTime();
+    return `FT-${timestamp}`;
+  };
+
   const handleAddTruck = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://api.fritfest.com/foodtruck",
-        newTruck,
+        {
+          ...newTruck,
+          skuCode: generateSkuCode(),
+        },
         {
           headers: {
             "Content-Type": "application/json; charset=UTF-8",
@@ -46,13 +53,12 @@ function ManageFoodTrucks() {
           },
         }
       );
-      setFoodTrucks([...foodTrucks, response.data]);
       setNewTruck({
         name: "",
-        skuCode: "",
         repName: "",
         repPhone: "",
       });
+      await fetchFoodTrucks();
     } catch (err) {
       console.error(err);
       setError("Failed to add food truck.");
@@ -67,7 +73,7 @@ function ManageFoodTrucks() {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
         });
-        setFoodTrucks(foodTrucks.filter((truck) => truck.foodTruckId !== id));
+        await fetchFoodTrucks();
       } catch (err) {
         console.error(err);
         setError("Failed to delete food truck.");
@@ -76,19 +82,17 @@ function ManageFoodTrucks() {
   };
 
   if (loading) {
-    return <div className="p-4 text-center">Loading food trucks...</div>;
+    return <div className="p-4 max-w-4xl mx-auto text-center">Loading food trucks...</div>;
   }
   if (error) {
-    return <div className="p-4 text-center text-red-500">{error}</div>;
+    return <div className="p-4 max-w-4xl mx-auto text-center text-red-500">{error}</div>;
   }
 
   return (
-    <div className="p-4 bg-background">
-      <h2 className="text-2xl font-bold mb-4 text-foreground">
-        Manage Food Trucks
-      </h2>
+    <div className="p-4 max-w-4xl mx-auto">
+      <h2 className="text-2xl font-bold mb-4">Manage Food Trucks</h2>
 
-      <form onSubmit={handleAddTruck} className="mb-6 bg-card p-4 rounded-lg">
+      <form onSubmit={handleAddTruck} className="mb-6 bg-gray-800 p-4 rounded-lg">
         <h3 className="text-xl font-semibold mb-2">Add New Food Truck</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input
@@ -97,15 +101,6 @@ function ManageFoodTrucks() {
             value={newTruck.name}
             onChange={handleInputChange}
             placeholder="Name"
-            required
-            className="p-2 rounded bg-gray-700 text-white"
-          />
-          <input
-            type="text"
-            name="skuCode"
-            value={newTruck.skuCode}
-            onChange={handleInputChange}
-            placeholder="SKU Code"
             required
             className="p-2 rounded bg-gray-700 text-white"
           />
@@ -130,18 +125,17 @@ function ManageFoodTrucks() {
         </div>
         <button
           type="submit"
-          className="mt-4 bg-primary hover:bg-primary-foreground text-foreground px-4 py-2 rounded-lg"
+          className="mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
         >
           Add Food Truck
         </button>
       </form>
 
-      <table className="w-full table-auto bg-card text-foreground">
+      <table className="w-full table-auto bg-gray-800 text-white">
         <thead>
           <tr>
             <th className="px-4 py-2">ID</th>
             <th className="px-4 py-2">Name</th>
-            <th className="px-4 py-2">SKU Code</th>
             <th className="px-4 py-2">Representative Name</th>
             <th className="px-4 py-2">Representative Phone</th>
             <th className="px-4 py-2">Actions</th>
@@ -152,7 +146,6 @@ function ManageFoodTrucks() {
             <tr key={truck.foodTruckId}>
               <td className="border px-4 py-2">{truck.foodTruckId}</td>
               <td className="border px-4 py-2">{truck.name}</td>
-              <td className="border px-4 py-2">{truck.skuCode}</td>
               <td className="border px-4 py-2">{truck.repName}</td>
               <td className="border px-4 py-2">{truck.repPhone}</td>
               <td className="border px-4 py-2">

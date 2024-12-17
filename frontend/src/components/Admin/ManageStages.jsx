@@ -7,7 +7,6 @@ function ManageStages() {
   const [error, setError] = useState(null);
   const [newStage, setNewStage] = useState({
     name: "",
-    location: "",
     capacity: "",
   });
 
@@ -35,7 +34,7 @@ function ManageStages() {
   const handleAddStage = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://api.fritfest.com/stage",
         {
           ...newStage,
@@ -43,16 +42,16 @@ function ManageStages() {
         },
         {
           headers: {
+            "Content-Type": "application/json; charset=UTF-8",
             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
         }
       );
-      setStages([...stages, response.data]);
       setNewStage({
         name: "",
-        location: "",
         capacity: "",
       });
+      await fetchStages();
     } catch (err) {
       console.error(err);
       setError("Failed to add stage.");
@@ -62,12 +61,12 @@ function ManageStages() {
   const handleDeleteStage = async (id) => {
     if (window.confirm("Are you sure you want to delete this stage?")) {
       try {
-        await axios.delete(`https://api.fritfest.com/stage/${id} `, {
+        await axios.delete(`https://api.fritfest.com/stage/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
         });
-        setStages(stages.filter((stage) => stage.stageId !== id));
+        await fetchStages();
       } catch (err) {
         console.error(err);
         setError("Failed to delete stage.");
@@ -76,14 +75,14 @@ function ManageStages() {
   };
 
   if (loading) {
-    return <div className="p-4 text-center">Loading stages...</div>;
+    return <div className="p-4 max-w-4xl mx-auto text-center">Loading stages...</div>;
   }
   if (error) {
-    return <div className="p-4 text-center text-red-500">{error}</div>;
+    return <div className="p-4 max-w-4xl mx-auto text-center text-red-500">{error}</div>;
   }
 
   return (
-    <div className="p-4">
+    <div className="p-4 max-w-4xl mx-auto">
       <h2 className="text-2xl font-bold mb-4">Manage Stages</h2>
 
       <form
@@ -98,15 +97,6 @@ function ManageStages() {
             value={newStage.name}
             onChange={handleInputChange}
             placeholder="Stage Name"
-            required
-            className="p-2 rounded bg-gray-700 text-white"
-          />
-          <input
-            type="text"
-            name="location"
-            value={newStage.location}
-            onChange={handleInputChange}
-            placeholder="Location"
             required
             className="p-2 rounded bg-gray-700 text-white"
           />
@@ -133,7 +123,6 @@ function ManageStages() {
           <tr>
             <th className="px-4 py-2">ID</th>
             <th className="px-4 py-2">Name</th>
-            <th className="px-4 py-2">Location</th>
             <th className="px-4 py-2">Capacity</th>
             <th className="px-4 py-2">Actions</th>
           </tr>
@@ -143,7 +132,6 @@ function ManageStages() {
             <tr key={stage.stageId}>
               <td className="border px-4 py-2">{stage.stageId}</td>
               <td className="border px-4 py-2">{stage.name}</td>
-              <td className="border px-4 py-2">{stage.location}</td>
               <td className="border px-4 py-2">{stage.capacity}</td>
               <td className="border px-4 py-2">
                 <button
