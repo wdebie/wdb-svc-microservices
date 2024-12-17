@@ -92,7 +92,7 @@ public class FoodItemService {
             FoodTruck foodTruck = foodTruckRepository.findById(foodTruckId)
                     .orElseThrow(() -> new IllegalArgumentException("FoodTruck not found"));
             foodItem.setFoodTruck(foodTruck);
-            foodTruck.getFoodItems().add(foodItem);
+            foodTruck.addFoodItem(foodItem);
         }
 
         foodItemRepository.save(foodItem);
