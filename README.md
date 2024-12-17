@@ -19,4 +19,4 @@ docker compose up
 
 --- 
 ## Schema
-![Schema](assets/FritFest.png)
+![Schema](assets/FristFest.png)
