@@ -58,7 +58,9 @@ function ManageFoodItems() {
           ...newFoodItem,
           skuCode: generateSkuCode(),
           price: parseFloat(newFoodItem.price),
-          foodTruckId: parseInt(newFoodItem.foodTruckId),
+          foodTruck: {
+            foodTruckId: newFoodItem.foodTruckId
+          }
         },
         {
           headers: {
