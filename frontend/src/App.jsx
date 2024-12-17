@@ -118,19 +118,16 @@ function App() {
       <div className="flex-grow flex">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route
-            path="/admin/*"
-            element={profile ? <AdminDashboard /> : <Navigate to="/" />}
-          >
-            <Route path="foodtrucks" element={<ManageFoodTrucks />} />
-            <Route path="fooditems" element={<ManageFoodItems />} />
-            <Route path="artists" element={<ManageArtists />} />
-            <Route path="stages" element={<ManageStages />} />
-            <Route path="schedules" element={<ManageSchedules />} />
-          </Route>
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/manage-foodtrucks" element={<ManageFoodTrucks />} />
+          <Route path="/manage-fooditems" element={<ManageFoodItems />} />
+          <Route path="/manage-artists" element={<ManageArtists />} />
+          <Route path="/manage-stages" element={<ManageStages />} />
+          <Route path="/manage-schedules" element={<ManageSchedules />} />
           <Route path="/schedule" element={<SchedulePage />} />
           <Route path="/food" element={<FoodPage />} />
           <Route path="/lineup" element={<LineupPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
       <Footer profile={profile} onLogin={login} onLogout={logOut} />

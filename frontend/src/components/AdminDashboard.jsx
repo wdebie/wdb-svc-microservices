@@ -10,7 +10,7 @@ function AdminDashboard() {
                 <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
                     <h3 className="text-2xl font-semibold mb-2">Manage Food Trucks</h3>
                     <p className="mb-4">Create, read, update, and delete food truck entries.</p>
-                    <Link to="/admin/foodtrucks">
+                    <Link to="/manage-foodtrucks">
                         <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
                             Manage Food Trucks
                         </button>
@@ -19,7 +19,7 @@ function AdminDashboard() {
                 <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
                     <h3 className="text-2xl font-semibold mb-2">Manage Food Items</h3>
                     <p className="mb-4">Create, read, update, and delete food items.</p>
-                    <Link to="/admin/fooditems">
+                    <Link to="/manage-fooditems">
                         <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
                             Manage Food Items
                         </button>
@@ -28,7 +28,7 @@ function AdminDashboard() {
                 <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
                     <h3 className="text-2xl font-semibold mb-2">Manage Artists</h3>
                     <p className="mb-4">Create, read, update, and delete artists.</p>
-                    <Link to="/admin/artists">
+                    <Link to="/manage-artists">
                         <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
                             Manage Artists
                         </button>
@@ -37,7 +37,7 @@ function AdminDashboard() {
                 <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
                     <h3 className="text-2xl font-semibold mb-2">Manage Stages</h3>
                     <p className="mb-4">Create, read, update, and delete stages.</p>
-                    <Link to="/admin/stages">
+                    <Link to="/manage-stages">
                         <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
                             Manage Stages
                         </button>
@@ -46,7 +46,7 @@ function AdminDashboard() {
                 <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
                     <h3 className="text-2xl font-semibold mb-2">Manage Schedule</h3>
                     <p className="mb-4">Create, read, update, and delete schedules.</p>
-                    <Link to="/admin/schedules">
+                    <Link to="/manage-schedules">
                         <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
                             Manage Schedule
                         </button>

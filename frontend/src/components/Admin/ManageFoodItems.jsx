@@ -7,7 +7,6 @@ function ManageFoodItems() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [newFoodItem, setNewFoodItem] = useState({
-    skuCode: "",
     name: "",
     price: "",
     foodTruckId: "",
@@ -45,13 +44,19 @@ function ManageFoodItems() {
     setNewFoodItem({ ...newFoodItem, [name]: value });
   };
 
+  const generateSkuCode = () => {
+    const timestamp = new Date().getTime();
+    return `FI-${timestamp}`;
+  };
+
   const handleAddFoodItem = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://api.fritfest.com/fooditem",
         {
           ...newFoodItem,
+          skuCode: generateSkuCode(),
           price: parseFloat(newFoodItem.price),
           foodTruckId: parseInt(newFoodItem.foodTruckId),
         },
@@ -62,13 +67,12 @@ function ManageFoodItems() {
           },
         }
       );
-      setFoodItems([...foodItems, response.data]);
       setNewFoodItem({
-        skuCode: "",
         name: "",
         price: "",
         foodTruckId: "",
       });
+      await fetchFoodItems();
     } catch (err) {
       console.error(err);
       setError("Failed to add food item.");
@@ -83,7 +87,7 @@ function ManageFoodItems() {
             Authorization: `Bearer ${localStorage.getItem("jwt")}`,
           },
         });
-        setFoodItems(foodItems.filter((item) => item.foodItemId !== id));
+        await fetchFoodItems();
       } catch (err) {
         console.error(err);
         setError("Failed to delete food item.");
@@ -92,14 +96,14 @@ function ManageFoodItems() {
   };
 
   if (loading) {
-    return <div className="p-4 text-center">Loading food items...</div>;
+    return <div className="p-4 max-w-4xl mx-auto text-center">Loading food items...</div>;
   }
   if (error) {
-    return <div className="p-4 text-center text-red-500">{error}</div>;
+    return <div className="p-4 max-w-4xl mx-auto text-center text-red-500">{error}</div>;
   }
 
   return (
-    <div className="p-4">
+    <div className="p-4 max-w-4xl mx-auto">
       <h2 className="text-2xl font-bold mb-4">Manage Food Items</h2>
 
       <form
@@ -108,15 +112,6 @@ function ManageFoodItems() {
       >
         <h3 className="text-xl font-semibold mb-2">Add New Food Item</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            type="text"
-            name="skuCode"
-            value={newFoodItem.skuCode}
-            onChange={handleInputChange}
-            placeholder="SKU Code"
-            required
-            className="p-2 rounded bg-gray-700 text-white"
-          />
           <input
             type="text"
             name="name"
@@ -163,10 +158,9 @@ function ManageFoodItems() {
         <thead>
           <tr>
             <th className="px-4 py-2">ID</th>
-            <th className="px-4 py-2">SKU Code</th>
             <th className="px-4 py-2">Name</th>
             <th className="px-4 py-2">Price (€)</th>
-            <th className="px-4 py-2">Food Truck ID</th>
+            <th className="px-4 py-2">Food Truck</th>
             <th className="px-4 py-2">Actions</th>
           </tr>
         </thead>
@@ -174,10 +168,9 @@ function ManageFoodItems() {
           {foodItems.map((item) => (
             <tr key={item.foodItemId}>
               <td className="border px-4 py-2">{item.foodItemId}</td>
-              <td className="border px-4 py-2">{item.skuCode}</td>
               <td className="border px-4 py-2">{item.name}</td>
               <td className="border px-4 py-2">{item.price.toFixed(2)}</td>
-              <td className="border px-4 py-2">{item.foodTruckId}</td>
+              <td className="border px-4 py-2">{item.foodTruck ? item.foodTruck.name : "Unknown"}</td>
               <td className="border px-4 py-2">
                 <button
                   onClick={() => handleDeleteFoodItem(item.foodItemId)}
