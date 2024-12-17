@@ -23,7 +23,8 @@ public class SecurityConfig {
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(withDefaults())
-                );
+                )
+                .cors().disable();
         return serverHttpSecurity.build();
     }
 }
