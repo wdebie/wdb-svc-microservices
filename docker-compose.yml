@@ -160,6 +160,9 @@ services:
   apt-frontend:
     image: willemdebie/apt-frontend
     container_name: apt-frontend
+    environment:
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
     networks:
       - wlinetwork
 
