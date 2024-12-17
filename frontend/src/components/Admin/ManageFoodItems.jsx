@@ -3,6 +3,7 @@ import axios from "axios";
 
 function ManageFoodItems() {
   const [foodItems, setFoodItems] = useState([]);
+  const [foodTrucks, setFoodTrucks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [newFoodItem, setNewFoodItem] = useState({
@@ -14,6 +15,7 @@ function ManageFoodItems() {
 
   useEffect(() => {
     fetchFoodItems();
+    fetchFoodTrucks();
   }, []);
 
   const fetchFoodItems = async () => {
@@ -25,6 +27,16 @@ function ManageFoodItems() {
       console.error(err);
       setError("Failed to fetch food items.");
       setLoading(false);
+    }
+  };
+
+  const fetchFoodTrucks = async () => {
+    try {
+      const response = await axios.get("https://api.fritfest.com/foodtrucks");
+      setFoodTrucks(response.data);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to fetch food trucks.");
     }
   };
 
@@ -124,15 +136,20 @@ function ManageFoodItems() {
             required
             className="p-2 rounded bg-gray-700 text-white"
           />
-          <input
-            type="number"
+          <select
             name="foodTruckId"
             value={newFoodItem.foodTruckId}
             onChange={handleInputChange}
-            placeholder="Food Truck ID"
             required
             className="p-2 rounded bg-gray-700 text-white"
-          />
+          >
+            <option value="" disabled>Select Food Truck</option>
+            {foodTrucks.map((truck) => (
+              <option key={truck.foodTruckId} value={truck.foodTruckId}>
+                {truck.name}
+              </option>
+            ))}
+          </select>
         </div>
         <button
           type="submit"

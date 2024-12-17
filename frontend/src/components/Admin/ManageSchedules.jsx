@@ -3,6 +3,8 @@ import axios from "axios";
 
 function ManageSchedules() {
   const [schedules, setSchedules] = useState([]);
+  const [artists, setArtists] = useState([]);
+  const [stages, setStages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [newSchedule, setNewSchedule] = useState({
@@ -15,6 +17,8 @@ function ManageSchedules() {
 
   useEffect(() => {
     fetchSchedules();
+    fetchArtists();
+    fetchStages();
   }, []);
 
   const fetchSchedules = async () => {
@@ -26,6 +30,26 @@ function ManageSchedules() {
       console.error(err);
       setError("Failed to fetch schedules.");
       setLoading(false);
+    }
+  };
+
+  const fetchArtists = async () => {
+    try {
+      const response = await axios.get("https://api.fritfest.com/artists");
+      setArtists(response.data);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to fetch artists.");
+    }
+  };
+
+  const fetchStages = async () => {
+    try {
+      const response = await axios.get("https://api.fritfest.com/stages");
+      setStages(response.data);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to fetch stages.");
     }
   };
 
@@ -129,24 +153,34 @@ function ManageSchedules() {
             required
             className="p-2 rounded bg-gray-700 text-white"
           />
-          <input
-            type="text"
+          <select
             name="artistSkuCode"
             value={newSchedule.artistSkuCode}
             onChange={handleInputChange}
-            placeholder="Artist SKU Code"
             required
             className="p-2 rounded bg-gray-700 text-white"
-          />
-          <input
-            type="number"
+          >
+            <option value="" disabled>Select Artist</option>
+            {artists.map((artist) => (
+              <option key={artist.skuCode} value={artist.skuCode}>
+                {artist.name}
+              </option>
+            ))}
+          </select>
+          <select
             name="stageId"
             value={newSchedule.stageId}
             onChange={handleInputChange}
-            placeholder="Stage ID"
             required
             className="p-2 rounded bg-gray-700 text-white"
-          />
+          >
+            <option value="" disabled>Select Stage</option>
+            {stages.map((stage) => (
+              <option key={stage.stageId} value={stage.stageId}>
+                {stage.name}
+              </option>
+            ))}
+          </select>
         </div>
         <button
           type="submit"

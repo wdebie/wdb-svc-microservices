@@ -88,9 +88,11 @@ public class FoodItemService {
         foodItem.setPrice(foodItemRequest.getPrice());
         foodItem.setName(foodItemRequest.getName());
 
-        FoodTruck foodTruck = foodTruckRepository.findById(foodTruckId)
-                .orElseThrow(() -> new IllegalArgumentException("FoodTruck not found"));
-        foodItem.setFoodTruck(foodTruck);
+        if (foodTruckId != null) {
+            FoodTruck foodTruck = foodTruckRepository.findById(foodTruckId)
+                    .orElseThrow(() -> new IllegalArgumentException("FoodTruck not found"));
+            foodItem.setFoodTruck(foodTruck);
+        }
 
         foodItemRepository.save(foodItem);
     }
