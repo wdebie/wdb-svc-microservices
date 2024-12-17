@@ -157,6 +157,12 @@ services:
       - wlinetwork
       - default
 
+  apt-frontend:
+    image: willemdebie/apt-frontend
+    container_name: apt-frontend
+    networks:
+      - wlinetwork
+
 volumes:
   schedule_data:
   artist_data:

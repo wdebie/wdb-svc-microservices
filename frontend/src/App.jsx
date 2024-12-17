@@ -39,7 +39,7 @@ function App() {
             redirect_uri:
               process.env.NODE_ENV === "development"
                 ? "http://localhost:5173"
-                : "https://wdb-svc-microservices.pages.dev",
+                : "https://aptproject.fritfest.com",
             grant_type: "authorization_code",
           },
           {
