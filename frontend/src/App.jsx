@@ -36,7 +36,7 @@ function App() {
             client_id:
               "661879216618-0gl8krhgkntc04h7m8qfvnp3k16datne.apps.googleusercontent.com",
             client_secret: "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",
-            redirect_uri: "http://localhost:5173",
+            redirect_uri: "https://wdb-svc-microservices.pages.dev",
             grant_type: "authorization_code",
           },
           {
