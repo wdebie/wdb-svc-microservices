@@ -3,7 +3,7 @@ import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer"
 import LandingPage from "./components/LandingPage";
 import AdminDashboard from "./components/AdminDashboard";
 import SchedulePage from "./components/SchedulePage";
@@ -14,7 +14,6 @@ import ManageArtists from "./components/Admin/ManageArtists";
 import ManageStages from "./components/Admin/ManageStages";
 import ManageSchedules from "./components/Admin/ManageSchedules";
 import LineupPage from "./components/LineupPage";
-
 function App() {
   const [user, setUser] = useState(() => {
     // Retrieve user from local storage if available
@@ -34,8 +33,9 @@ function App() {
           "https://oauth2.googleapis.com/token",
           {
             code,
-            client_id: process.env.GOOGLE_CLIENT_ID,
-            client_secret: process.env.GOOGLE_CLIENT_SECRET,
+            client_id:
+              "661879216618-0gl8krhgkntc04h7m8qfvnp3k16datne.apps.googleusercontent.com",
+            client_secret: "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",
             redirect_uri:
               process.env.NODE_ENV === "development"
                 ? "http://localhost:5173"
