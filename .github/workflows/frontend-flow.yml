@@ -1,0 +1,33 @@
+name: Build and deliver frontend
+
+on: push
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    name: Node.js build, test, deliver frontend
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm install
+
+      - name: Build project
+        working-directory: ./frontend
+        run: npm run build
+
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Docker Build
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest ./frontend
+
+      - name: Upload container to Docker Hub with Push
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
