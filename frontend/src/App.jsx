@@ -3,6 +3,7 @@ import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
+import Footer from "./components/Footer"
 import LandingPage from "./components/LandingPage";
 import AdminDashboard from "./components/AdminDashboard";
 import SchedulePage from "./components/SchedulePage";
@@ -128,6 +129,7 @@ function App() {
           <Route path="/food" element={<FoodPage />} />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 }
