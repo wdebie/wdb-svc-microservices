@@ -12,15 +12,15 @@ public class CorsFilter implements WebFilter {
     public Mono<Void> filter(ServerWebExchange ctx, WebFilterChain chain) {
         ctx.getResponse().getHeaders().add("Access-Control-Allow-Origin", "*");
         ctx.getResponse().getHeaders().add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
-        ctx.getResponse().getHeaders().add("Access-Control-Allow-Headers", "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range");
+        ctx.getResponse().getHeaders().add("Access-Control-Allow-Headers", "*");
         
         if (ctx.getRequest().getMethod() == HttpMethod.OPTIONS) {
             ctx.getResponse().getHeaders().add("Access-Control-Max-Age", "1728000");
             ctx.getResponse().setStatusCode(HttpStatus.NO_CONTENT);
             return Mono.empty();
         } else {
-            ctx.getResponse().getHeaders().add("Access-Control-Expose-Headers", "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range");
+            ctx.getResponse().getHeaders().add("Access-Control-Expose-Headers", "*");
             return chain.filter(ctx);
         }
     }
-} 
+}

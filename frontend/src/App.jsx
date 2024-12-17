@@ -130,7 +130,7 @@ function App() {
           <Route path="/lineup" element={<LineupPage />} />
         </Routes>
       </div>
-      <Footer />
+      <Footer profile={profile} onLogin={login} onLogout={logOut} />
     </div>
   );
 }
