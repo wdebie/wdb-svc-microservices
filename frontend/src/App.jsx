@@ -13,7 +13,7 @@ import ManageFoodItems from "./components/Admin/ManageFoodItems";
 import ManageArtists from "./components/Admin/ManageArtists";
 import ManageStages from "./components/Admin/ManageStages";
 import ManageSchedules from "./components/Admin/ManageSchedules";
-
+import LineupPage from "./components/LineupPage";
 function App() {
   const [user, setUser] = useState(() => {
     // Retrieve user from local storage if available
@@ -127,6 +127,7 @@ function App() {
           </Route>
           <Route path="/schedule" element={<SchedulePage />} />
           <Route path="/food" element={<FoodPage />} />
+          <Route path="/lineup" element={<LineupPage />} />
         </Routes>
       </div>
       <Footer />
