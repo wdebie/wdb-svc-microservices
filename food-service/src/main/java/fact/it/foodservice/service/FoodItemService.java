@@ -88,6 +88,7 @@ public class FoodItemService {
         foodItem.setPrice(foodItemRequest.getPrice());
         foodItem.setName(foodItemRequest.getName());
 
+
         if(foodItemRequest.getFoodTruck() != null){
             Long foodTruckId = foodItemRequest.getFoodTruck().getFoodTruckId();
             if(foodTruckId != null){
@@ -97,6 +98,7 @@ public class FoodItemService {
                 }
                 foodItem.setFoodTruck(foodTruck);
             }
+
         }
 
         foodItemRepository.save(foodItem);

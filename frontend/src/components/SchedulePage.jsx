@@ -31,10 +31,10 @@ function SchedulePage() {
     }, []);
 
     if (loading) {
-        return <div className="p-4 text-center">Loading schedules...</div>;
+        return <div className="p-4 max-w-4xl mx-auto text-center">Loading schedules...</div>;
     }
     if (error) {
-        return <div className="p-4 text-center text-destructive">{error}</div>;
+        return <div className="p-4 max-w-4xl mx-auto text-center text-destructive">{error}</div>;
     }
 
     const groupedSchedules = stages.reduce((acc, stage) => {
