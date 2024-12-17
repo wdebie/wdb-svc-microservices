@@ -14,6 +14,7 @@ import ManageArtists from "./components/Admin/ManageArtists";
 import ManageStages from "./components/Admin/ManageStages";
 import ManageSchedules from "./components/Admin/ManageSchedules";
 import LineupPage from "./components/LineupPage";
+
 function App() {
   const [user, setUser] = useState(() => {
     // Retrieve user from local storage if available
