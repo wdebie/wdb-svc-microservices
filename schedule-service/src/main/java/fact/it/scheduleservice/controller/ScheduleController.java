@@ -20,6 +20,7 @@ public class ScheduleController {
     public List<ScheduleResponse> getAllSchedulesBySkuCode(@RequestParam List<String> skuCode){
         return scheduleService.getAllSchedulesBySkuCode(skuCode);
     }
+    
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)

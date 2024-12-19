@@ -32,6 +32,13 @@ spring:
           filters:
             - SetPath=/api/schedule
 
+        - id: schedule-service
+          uri: http://${SCHEDULE_SERVICE_BASEURL:localhost:8081}
+          predicates:
+            - Path=/schedule/{id}
+          filters:
+            - SetPath=/api/schedule/{id}
+
         - id: schedule-service-all
           uri: http://${SCHEDULE_SERVICE_BASEURL:localhost:8081}
           predicates:
