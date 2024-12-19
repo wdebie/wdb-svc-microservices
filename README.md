@@ -44,6 +44,11 @@ Then run the following command:
 docker compose up
 ```
 
+Keep in mind that without tweaks to the docker-compose.yml file, this will fail because `wlinetwork` doesn't exist. On our server, we use [Nginx Proxy Manager](https://nginxproxymanager.com/) which allows us to put all of the services in one network without opening any ports to the databases, services, or front-end website at all. To resolve this locally, create the network before attempting to start the compose file:
+```
+docker network create wlinetwork
+```
+
 --- 
 ## Schema
 Hieronder vindt u ons technisch schema. Hier wordt weergegeven hoe de applicatie is opgesteld.
