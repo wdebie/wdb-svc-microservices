@@ -3,6 +3,8 @@
 In dit project maken we een Java systeem met microservices om onze applicatie te runnen. We hebben voor dit thema gekozen omdat we beide van festivals houden.
 We maken gebruiken van 4 microservices: artist, food, stage en schedule. 
 
+Watch a demo of our project here: https://youtu.be/HpL3S2dRoYE
+
 ---
 ## Docker
 Onze docker-compose ziet er als volgt uit:
