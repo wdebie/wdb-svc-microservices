@@ -17,7 +17,6 @@ Then run the following command:
 docker compose up
 ```
 
-
 --- 
 ## Schema
 ![Schema](assets/FristFest.png)
