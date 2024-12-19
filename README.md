@@ -52,7 +52,7 @@ Er wordt ook getoond hoe de connectie is tussen de verschillende services.
 ---
 
 ## Werking van de endpoints
-Al onze calls worden gedaan via `api.fritfest.com` dit hebben we voor extra veiligheid gedaan. De services zijn niet rechtstreeks beschikbaar.
+Al onze calls worden gedaan via [api.fritfest.com](https://api.fritfest.com) dit hebben we voor extra veiligheid gedaan. De services zijn niet rechtstreeks beschikbaar.
 Als je niet authenticated bent kan je ook geen _**POST**_, _**PUT**_ en **_DELETE_** requests doen. Dit wordt getoond in onderstaande screenshots:
 ![POST](assets/forbiddenPOST.png)
 ![PUT](assets/putNOACCESS.png)
@@ -63,7 +63,8 @@ Als je eenmaal een geldig token hebt kan je deze acties welk uitvoeren:
 
 Voor de **_GETS_** heb je geen authentication nodig.
 
-**Artists**
+**Artists**  
+
 Via de endpoints /artists kan je al de artiesten opvragen. Dit zie je op de onderstaande screenshot:
 ![GET](assets/artistsGET.png)
 
@@ -78,4 +79,65 @@ En hij is aangepast:
 
 Als laatste willen we een artiest verwijderen:
 ![DELETE](assets/artistDELETE.png)
-![DELETED](assets/artistDELETED.png)
+![DELETED](assets/artistDELETED.png)  
+**Stage**  
+Om al de stages van het festival te bekijken kunnen we naar /stages gaan:
+![GET](assets/stagesGET.png)
+
+Natuurlijk willen we extra stages kunnen aanmaken op ons festival als we groter worden:
+![POST](assets/stagePOST.png)
+![NEW](assets/stageNEW.png)
+
+We merken dat een stage niet in de smaak valt, dus we gaan dit verwijderen zodat we plaats hebben voor een andere stage:
+![DELETE](assets/stageDELETE.png)
+![DELETED](assets/stageDELETED.png)
+
+**Food**
+
+Wat is een festival nu zonder eten. We willen graag kijken wat voor eten ons festival te bieden heeft:
+![GET](assets/fooditemsGET.png)
+
+Ook willen we zien welke food-trucks er allemaal naar het festival komen:
+![GET](assets/foodtrucksGET.png)
+
+We merken dat er wat weinig eten is en het aantal foodtrucks kan ook altijd meer worden. Dit kunnen we natuurlijk ook aanpassen. 
+We gaan een food-truck toevoegen en hier ook een item aan koppelen:
+![POST](assets/foodtruckPOST.png)
+![NEW](assets/foodtruckNEW.png)
+
+Nu het eten nog:
+![POST](assets/fooditemPOST.png)
+![NEW](assets/fooditemNEW.png)
+
+Jammer genoegen valt de nieuwe foodtruck niet in de smaak. We gaan deze moeten gaan verwijderen van het festival voor de volgende editie. Eerst moeten we het food-item verwijderen dat is gekoppeld aan de food-truck:
+![DELETE](assets/fooditemDELETE.png)
+![DELETED](assets/fooditemDELETED.png)
+
+Nu nog de food-truck:
+![DELETE](assets/foodtruckDELETE.png)
+![DELETED](assets/foodtruckDELETED.png)  
+
+**Schedule**  
+
+We willen de mensen natuurlijk ook een overzicht bieden van wie er wanneer en waar komt optreden. Dit gaat via __/schedules__:
+![GET](assets/schedulesGET.png)
+
+We hebben een nieuwe artiest weten te strikken en hebben deze natuurlijk ook meteen op onze line-up gezet:
+![NEW](assets/scheduleNEW.png)
+
+Jammer genoeg heeft er ook iemand afgebeld en moeten we deze verwijderen om zo geen valse info te verspreiden.
+![DELETE](assets/scheduleDELETE.png)
+![DELETED](assets/scheduleDELETED.png)
+
+---
+## Uitbreiding
+
+2.1. Frontend
+---
+Ben je nu zelf ook benieuwd naar ons festival kom dan zeker een kijkje namen op onze website.
+[aptproject.fritfest.com](https://aptproject.fritfest.com/)
+Hopelijk zien we je snel. 
+
+
+
+
