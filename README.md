@@ -85,7 +85,9 @@ En hij is aangepast:
 Als laatste willen we een artiest verwijderen:
 ![DELETE](assets/artistDELETE.png)
 ![DELETED](assets/artistDELETED.png)  
+
 **Stage**  
+
 Om al de stages van het festival te bekijken kunnen we naar /stages gaan:
 ![GET](assets/stagesGET.png)
 
