@@ -143,8 +143,9 @@ Jammer genoeg heeft er ook iemand afgebeld en moeten we deze verwijderen om zo g
 
 2.1. Frontend
 ---
-Ben je nu zelf ook benieuwd naar ons festival kom dan zeker een kijkje namen op onze website.
+Ben je nu zelf ook benieuwd naar ons festival kom dan zeker een kijkje nemen op onze website.
 [aptproject.fritfest.com](https://aptproject.fritfest.com/)
+
 Hopelijk zien we je snel. 
 
 
